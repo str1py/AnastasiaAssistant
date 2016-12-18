@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Input;
-using System.Windows.Documents;
-
 using System.Windows.Media.Imaging;
 using AnastasiaAssistant.BassPlayer;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace AnastasiaAssistant
 {
@@ -66,6 +66,12 @@ namespace AnastasiaAssistant
             }
             Uri imagePlayUri1 = (new Uri(@"pack://application:,,,/AnastasiaRes/Social/AA_logo_Off.png", UriKind.Absolute));
             AnastasiaPicture.Source = new BitmapImage(imagePlayUri1);
+            CurrectVersion.Text = "Установленная версия : " + System.Windows.Forms.Application.ProductVersion;
+            if (String.IsNullOrEmpty(AnastasiaAssistant.Properties.Settings.Default.LastUpdateCheck))
+                LastCheckUpdate.Text = "Последняя проверка : никогда не проводилась";
+            else
+                LastCheckUpdate.Text = "Последняя проверка : " + AnastasiaAssistant.Properties.Settings.Default.LastUpdateCheck;
+            FillCommandList();
         }
 
         #region AppMethods
@@ -100,7 +106,25 @@ namespace AnastasiaAssistant
         }
         #endregion
 
-        #region SettingsMenu
+        #region rightMenu
+        private void CheckUpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            Properties.Settings.Default.LastUpdateCheck = DateTime.Now.ToString();
+            Properties.Settings.Default.Save();
+        }
+        private void FillCommandList()
+        {
+            Encoding enc = Encoding.GetEncoding(1251);
+            StreamReader f = new StreamReader(System.Windows.Forms.Application.StartupPath + @"\Commands.txt",enc);
+            string[] a = f.ReadToEnd().Split('\n');
+            foreach (var K in a)
+            {
+                HelpListCommands.Items.Add(K);
+            }
+        }
+        #endregion
+            #region SettingsMenu
         private void ShowHideSettingsMenu(string Storyboard, System.Windows.Controls.Button btnHide, System.Windows.Controls.Button btnShow, StackPanel pnl)
         {
             Storyboard sb = Resources[Storyboard] as Storyboard;
@@ -614,8 +638,10 @@ namespace AnastasiaAssistant
                 NewAvatar.Text = dlg.FileName;
             }
         }
- 
+
         #endregion
+
+      
     }
     public class ValueAngleConverter : IMultiValueConverter
     {

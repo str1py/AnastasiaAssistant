@@ -225,13 +225,13 @@ namespace AnastasiaAssistant.MainLogic
             commands.Add("след", PlayNextSong); commands.Add("следующий", PlayNextSong);
             commands.Add("пред", PlayPrevSong); commands.Add("предыдущий", PlayPrevSong);
             commands.Add("пауза", SongPause);
-            commands.Add("закрой плеер", PlayerExit); commands.Add("останови плеер", PlayerExit); commands.Add("выход из плеер", PlayerExit);
+            commands.Add("закрой плеер", PlayerExit); commands.Add("останови плеер", PlayerExit); commands.Add("выход из плеера", PlayerExit);
             commands.Add("покажи кнопки", PlayerButTelegram); commands.Add("кнопки плеера", PlayerButTelegram);
 
-            commands.Add("что играет сейчас", WhatSongNow); commands.Add("песня", WhatSongNow);
+            commands.Add("что сейчас играет", WhatSongNow); commands.Add("песня", WhatSongNow);
             commands.Add("что за трэк", WhatSongNow);
 
-            commands.Add("Любимый жанр", FavouriteGanre);
+            commands.Add("любимый жанр", FavouriteGanre);
             // commands.Add("громче", volumeUpPlayer);
             // commands.Add("тише", volumeDawnPlayer);
 

@@ -84,9 +84,8 @@
                         <DropShadowEffect Color="Azure" Opacity="10" ShadowDepth="5"/>
                     </Border.Effect>
                 </Border>
-                <Button Content = "{x:Static p:Resources.UpdateButton}" Margin="78,6,544,4.28" Style="{DynamicResource MainButtons}" />
                 <Button x:Name="SettingsMenuShow" Content="{x:Static p:Resources.SettingsButton}" Margin="0,6,622,4.28" Click="SettingsMenuShow_Click" Style="{DynamicResource MainButtons}" />
-                <Button Content="{x:Static p:Resources.AboutButton}" Margin="159,6,456,4.28" Style="{DynamicResource MainButtons}" />
+              
 
 
             </Grid>
@@ -94,7 +93,7 @@
         <StackPanel Margin="0,83,0,0" Height="367" VerticalAlignment="Top" Grid.ColumnSpan="2" >
             <TabControl Height="353.961" Margin="0,14,0.333,0" Background="{x:Null}" BorderBrush="{x:Null}">
                 <TabItem Header="Anastasia" Style="{DynamicResource TabButtons}" Margin="11,0,-11,0">
-                    <Grid HorizontalAlignment="Left" Width="310.667">
+                    <Grid HorizontalAlignment="Left" Width="311">
                         <TextBox x:Name="UserMessage" Margin="10,298,0,5.956" Height="22.045" Background="{x:Null}" HorizontalAlignment="Left" Width="299.667" Foreground="White" KeyDown="UserMessage_KeyDown" Grid.ColumnSpan="2" PreviewKeyDown="UserMessage_PreviewKeyDown" >
                             <TextBox.BorderBrush>
                                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -118,8 +117,8 @@
                         <Label x:Name="UserCommand"  Height="37"  Margin="0,-5.5,0.333,294.5" Foreground="White" FontSize="16" HorizontalAlignment="Right" Grid.Column="1" d:LayoutOverrides="TopMargin, BottomMargin"  />
                         <Button  x:Name="SendButt" Content="{x:Static p:Resources.SendMessageButton}" Height="22.162"  Margin="232.5,295.919,0,7.919" Style="{DynamicResource MainButtons}" Click="SendButt_Click" HorizontalAlignment="Left" Width="74.667" d:LayoutOverrides="TopMargin, BottomMargin"/>
                         <Label x:Name="UserCommandShow" Margin="0,149,4,147" Foreground="White" FontSize="16" FontFamily="Adobe Caslon Pro Bold" HorizontalAlignment="Right" Grid.Column="1"  />
-
                     </Grid>
+
                 </TabItem>
                 <TabItem x:Name="MusTabItem" Header="{x:Static p:Resources.TabMusic}" Margin="46,-2,-46,0" Style="{DynamicResource TabButtons}" HorizontalAlignment="Left" Width="60" Visibility="Hidden">
                     <Grid Margin="-2.812,0,0,-1.833">
@@ -214,9 +213,30 @@
                         <Label x:Name="TabTimeNow" Height="62" VerticalAlignment="Bottom" Margin="241,0,0,134" HorizontalAlignment="Left" Width="82" Foreground="White" Grid.RowSpan="2" FontSize="16" Grid.Column="1"/>
                     </Grid>
                 </TabItem>
-
             </TabControl>
+        </StackPanel>
+        <StackPanel x:Name="Updates">
+            <Grid Margin="322,90,0,0" Height="361"></Grid>
+            <TabControl Margin="322,-400,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Height="381">
+                <TabItem Header="Функционал" Style="{DynamicResource TabButtons}" Margin="78,0,-78,0">
+                    <Grid>
+                        <TextBlock Text="Команды" Margin="36,20,2,299" FontSize="24"></TextBlock>
+                    <ListView x:Name="HelpListCommands" Margin="38,49,4,-8" Background="{x:Null}" Foreground="White" BorderBrush="White"/>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="UpdatesButton" Header="{x:Static p:Resources.UpdateButton}"  Style="{DynamicResource TabButtons}" Margin="86,0,-86,0"  >
+                    <Grid>
+                     <TextBlock Text="Обновление программы" Margin="71,23,37,296" FontSize="20" FontWeight="Bold"></TextBlock>
+                     <Image Margin="10,15,304,287" Width="35" Height="35" Source="pack://application:,,,/AnastasiaRes/Social/AA_logo_On.png"></Image>
+                        <TextBlock x:Name="CurrectVersion" Margin="22,78,0,242" FontSize="14"></TextBlock>
+                        <TextBlock x:Name="LastCheckUpdate" Margin="22,106,0,214" FontSize="14"></TextBlock>
+                        <Button x:Name="CheckUpdateButton" Content="Проверить наличие обновлений" Margin="72,166,47,150" Style="{DynamicResource MainButtons}" Click="CheckUpdateButton_Click" FontSize="16"></Button>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="{x:Static p:Resources.AboutButton}" Style="{DynamicResource TabButtons}"  Margin="102,0,-102,0">
 
+                </TabItem>
+            </TabControl>
         </StackPanel>
         <StackPanel x:Name="SettMenuRight" Grid.Column="1" Margin="0,46,-710,0" HorizontalAlignment="Right" Width="710"  >
             <Grid Height="209"  >
