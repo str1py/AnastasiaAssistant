@@ -1,0 +1,544 @@
+﻿<Window x:Class="AnastasiaAssistant.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnastasiaAssistant"
+        xmlns:p = "clr-namespace:AnastasiaAssistant.Properties"
+        xmlns:t ="clr-namespace:AnastasiaAssistant.AnswersLogic"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:my ="clr-namespace:AnastasiaAssistant.AnastasiaRes.Elements"
+        mc:Ignorable="d"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        Title="AnastasiaMainWindow" Height="450" Width="700" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None">
+
+
+
+    <Window.Resources>
+        <local:ValueAngleConverter x:Key="valueAngleConverter"/>
+        <local:ValueTextConverter x:Key="valueTextConverter"/>
+        <Storyboard x:Key="sbSettingsMenuShow" >
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,45,-710,0" To="0,45,0,0" DecelerationRatio=".9" Duration="0:0:1" />
+        </Storyboard>
+        <Storyboard x:Key="sbSettingsMenuHide">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,45,0,0" To="0,45,-710,0" AccelerationRatio=".9" Duration="0:0:1" />
+        </Storyboard>
+        <DataTemplate x:Key="SimpleAnswer">
+            <Grid Width="288" Height="135" >
+                <TextBlock Text="{Binding Answer}" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="0,17.98,0,6.035" HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontStyle="Italic"></TextBlock>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="AnswerWithPict">
+            <Grid Width="300" Height="135" >
+                <Image x:Name="WeatherBack" Margin="0,30,-180,0"  Source="{Binding WeatherBack}" Width="100" Height="120" ></Image>
+                <TextBlock Text="{Binding Answer}" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="0,17.98,0,6.035" HorizontalAlignment="Left" Foreground="White" FontWeight="Bold" FontStyle="Italic"></TextBlock>
+            </Grid>
+        </DataTemplate>
+        <t:TempSelect          
+                SimpleAnswer="{StaticResource SimpleAnswer}"  
+                AnswerWithPict="{StaticResource AnswerWithPict}"
+
+                x:Key="TS"/>
+
+    </Window.Resources>
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="6" ShadowDepth="7"/>
+    </Window.Effect>
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF01CBAF" Offset="0"/>
+            <GradientStop Color="#FF59018B" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Grid Height="450" VerticalAlignment="Top" Margin="0,0,0,0" >
+
+        <StackPanel x:Name="ProgramName" Visibility="Visible" Grid.ColumnSpan="2">
+            <TextBlock Text="Anastasia Assistant" Height="56" Foreground="White" HorizontalAlignment="Center" FontSize="36"></TextBlock>
+        </StackPanel>
+        <StackPanel x:Name="PlayerStack" Height="64" VerticalAlignment="Top" Visibility="Hidden" Grid.ColumnSpan="2">
+            <Image x:Name="BAckground"></Image>
+            <Label x:Name="Artist"  Margin="0,-5,0,0" Height="25" FontSize="10" Background="{x:Null}" Foreground="White" FontWeight="Bold" HorizontalAlignment="Center" />
+            <Label x:Name="SongName"  Margin="0,-14,0,0" Height="25" FontSize="10" Foreground="White" HorizontalAlignment="Center"/>
+
+            <Slider x:Name="sliderTime" Margin="261,10,262,0" Height="14"  ValueChanged="sliderTime_ValueChanged" Style="{DynamicResource SimpleSlider}" SmallChange="0"></Slider>
+
+            <Button x:Name="Next" Content="Next" Height="20" Margin="0,-45,271.5,0" Click="Next_Click"  Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="45" />
+            <Button x:Name="Prev" Content="Prev" Height="20" Margin="263.5,-45,0,0" HorizontalAlignment="Left" Width="45" Click="Prev_Click"  Style="{DynamicResource MainButtons}" ></Button>
+            <Button x:Name="Pause" Content="Pause" Height="20" Margin="323,-45,332,0" Click="Pause_Click"  Style="{DynamicResource MainButtons}" Visibility="Hidden"/>
+            <Button x:Name="Play" Content="Play" Height="20" Margin="0,-45,332,0" HorizontalAlignment="Right" Width="45" Click="Play_Click"  Style="{DynamicResource MainButtons}" />
+        </StackPanel>
+        <StackPanel Height="29.334" VerticalAlignment="Top" HorizontalAlignment="Right" Width="55.333" Grid.Column="1">
+            <Button x:Name="CloseApp" Content="x" HorizontalAlignment="Right" Width="25" Margin="0,0,0.5,11.339" Style="{DynamicResource MainButtons}"  FontSize="16" Click="CloseApp_Click" Height="25"/>
+            <Button x:Name="AppDown" Content="_" HorizontalAlignment="Right" Width="25" Margin="0,-47.5,26,0" Style="{DynamicResource MainButtons}"  FontSize="16"  Click="AppDown_Click" Height="25"  />
+        </StackPanel>
+        <StackPanel Height="36" VerticalAlignment="Top" Margin="0,54,0,0" Grid.ColumnSpan="2">
+            <Grid Height="34.28">
+                <Border Margin="10,0,15,0.104" BorderThickness="1" BorderBrush="Aquamarine"  CornerRadius="65" Height="2.228" VerticalAlignment="Bottom" >
+                    <Border.Effect>
+                        <DropShadowEffect Color="Azure" Opacity="10" ShadowDepth="5"/>
+                    </Border.Effect>
+                </Border>
+                <Border BorderThickness="1" Margin="10,2,16,0"  BorderBrush="Aquamarine" Height="2"  CornerRadius="65"  VerticalAlignment="Top">
+                    <Border.Effect>
+                        <DropShadowEffect Color="Azure" Opacity="10" ShadowDepth="5"/>
+                    </Border.Effect>
+                </Border>
+                <Button Content = "{x:Static p:Resources.UpdateButton}" Margin="78,6,544,4.28" Style="{DynamicResource MainButtons}" />
+                <Button x:Name="SettingsMenuShow" Content="{x:Static p:Resources.SettingsButton}" Margin="0,6,622,4.28" Click="SettingsMenuShow_Click" Style="{DynamicResource MainButtons}" />
+                <Button Content="{x:Static p:Resources.AboutButton}" Margin="159,6,456,4.28" Style="{DynamicResource MainButtons}" />
+
+
+            </Grid>
+        </StackPanel>
+        <StackPanel Margin="0,83,0,0" Height="367" VerticalAlignment="Top" Grid.ColumnSpan="2" >
+            <TabControl Height="353.961" Margin="0,14,0.333,0" Background="{x:Null}" BorderBrush="{x:Null}">
+                <TabItem Header="Anastasia" Style="{DynamicResource TabButtons}" Margin="11,0,-11,0">
+                    <Grid HorizontalAlignment="Left" Width="310.667">
+                        <TextBox x:Name="UserMessage" Margin="10,298,0,5.956" Height="22.045" Background="{x:Null}" HorizontalAlignment="Left" Width="299.667" Foreground="White" KeyDown="UserMessage_KeyDown" Grid.ColumnSpan="2" PreviewKeyDown="UserMessage_PreviewKeyDown" >
+                            <TextBox.BorderBrush>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                    <GradientStop Color="#FF5100C7" Offset="1"/>
+                                </LinearGradientBrush>
+                            </TextBox.BorderBrush>
+                        </TextBox>
+                        <ListView x:Name="MainChat" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="135" Background="{x:Null}" 
+                      Margin="5,160.5,0,30.5" IsEnabled="False" Foreground="White"  BorderBrush="{x:Null}" ItemTemplateSelector="{StaticResource TS}"
+                      ItemsSource="{Binding TempSelect}" Style="{DynamicResource ListViewStyle}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="304" d:LayoutOverrides="VerticalAlignment, TopMargin, BottomMargin" Grid.ColumnSpan="2" >
+                            <ListView.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform/>
+                                    <SkewTransform AngleY="-0.09"/>
+                                    <RotateTransform/>
+                                    <TranslateTransform Y="-0.248"/>
+                                </TransformGroup>
+                            </ListView.RenderTransform>
+                        </ListView>
+                        <Label x:Name="UserCommand"  Height="37"  Margin="0,-5.5,0.333,294.5" Foreground="White" FontSize="16" HorizontalAlignment="Right" Grid.Column="1" d:LayoutOverrides="TopMargin, BottomMargin"  />
+                        <Button  x:Name="SendButt" Content="{x:Static p:Resources.SendMessageButton}" Height="22.162"  Margin="232.5,295.919,0,7.919" Style="{DynamicResource MainButtons}" Click="SendButt_Click" HorizontalAlignment="Left" Width="74.667" d:LayoutOverrides="TopMargin, BottomMargin"/>
+                        <Label x:Name="UserCommandShow" Margin="0,149,4,147" Foreground="White" FontSize="16" FontFamily="Adobe Caslon Pro Bold" HorizontalAlignment="Right" Grid.Column="1"  />
+
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="MusTabItem" Header="{x:Static p:Resources.TabMusic}" Margin="46,-2,-46,0" Style="{DynamicResource TabButtons}" HorizontalAlignment="Left" Width="60" Visibility="Hidden">
+                    <Grid Margin="-2.812,0,0,-1.833">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52*"/>
+                            <ColumnDefinition Width="645*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="159*"/>
+                            <RowDefinition Height="169*"/>
+                        </Grid.RowDefinitions>
+                        <ListView x:Name="PlayList" Margin="1,28,424.812,-2" Background="{x:Null}" BorderBrush="{x:Null}" Style="{DynamicResource PlayList}" ItemTemplate="{DynamicResource PlayListItems}" MouseDoubleClick="PlayList_MouseDoubleClick" Visibility="Visible" Grid.RowSpan="2" Grid.ColumnSpan="2"  />
+                        <Label Content="{x:Static p:Resources.TabMusicPlayListLabel}" Height="29" VerticalAlignment="Top" Margin="1,3,0,0" Foreground="White" FontSize="16" HorizontalAlignment="Left" Width="80" Grid.Column="1" />
+                        <Ellipse Margin="328,51,101.812,62" Grid.RowSpan="2" Grid.Column="1">
+                            <Ellipse.Fill>
+                                <ImageBrush x:Name="TabMusicSongPicture" Stretch="Fill"/>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <Label x:Name="TabMusicArtist" Height="37" VerticalAlignment="Top" Margin="228,-6,3.812,0" FontSize="21.333" Foreground="White" FontFamily="Source Sans Pro Black" Grid.Column="1"/>
+                        <Label x:Name="TabMusicSong" Height="39" VerticalAlignment="Top" Margin="227,19,4.812,0" FontFamily="Source Sans Pro Semibold" FontSize="14.667" Grid.Column="1">
+                            <Label.Foreground>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="White" Offset="0"/>
+                                    <GradientStop Color="#FF62FFEA" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Label.Foreground>
+                        </Label>
+                        <Slider x:Name="sliderVol" Margin="322,0,84.812,5" Value="50" Maximum="100" Height="14" ValueChanged="sliderVol_ValueChanged" Style="{DynamicResource SliderStyle}" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1"/>
+                        <Button x:Name="TabMusicNext" Content="Next" Margin="0,0,86.812,43" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="40" Click="TabMusicNext_Click" Grid.Row="1" Grid.Column="1"/>
+                        <Button x:Name="TabMusicPrev" Content="Prev" Height="30" Margin="0,0,285.812,42" VerticalAlignment="Bottom" Style="{DynamicResource MainButtons}" Click="TabMusicPrev_Click" HorizontalAlignment="Right" Width="40" Grid.Row="1" Grid.Column="1"/>
+                        <Button x:Name="TabMusicPlay" Content="Play" Height="40" Margin="0,0,167.812,17" VerticalAlignment="Bottom" Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="75" Click="TabMusicPlay_Click" Grid.Row="1" Grid.Column="1"/>
+                        <Button x:Name="TabMusicPause" Content="Pause" Height="40" VerticalAlignment="Bottom" Margin="0,0,167.812,16" Visibility="Hidden" Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="75" Click="TabMusicPause_Click" Grid.Row="1" Grid.Column="1"/>
+                        <Border BorderBrush="AliceBlue" BorderThickness="0,0,1,1" Margin="0,140,-288.188,-37" HorizontalAlignment="Right" Width="228" Grid.RowSpan="2" Grid.Column="1" >
+                            <Border.Effect>
+                                <DropShadowEffect Color="Maroon" Opacity="10" BlurRadius="4" />
+                            </Border.Effect>
+                        </Border>
+
+                        <Slider Name="sliderTrack"  Value="1" Height="237" Width="231"
+        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="320,40,93.812,51" Grid.RowSpan="2" Background="AliceBlue" Foreground="AliceBlue" Grid.Column="1">
+                            <Slider.Template>
+                                <ControlTemplate>
+                                    <Viewbox>
+                                        <Canvas Width="300" Height="300" Margin="5">
+                                            <Ellipse Fill="Transparent" Width="300" Height="300" Canvas.Left="0" Canvas.Top="0" StrokeThickness="10"
+                            MouseLeftButtonUp="Ellipse_MouseLeftButtonUp" >
+                                                <Ellipse.Stroke>
+                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                        <GradientStop Color="#FF59018B" Offset="0"/>
+                                                        <GradientStop Color="#FF01CBAF" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Ellipse.Stroke>
+                                            </Ellipse>
+                                            <Ellipse Fill="Transparent" Width="60" Height="60" Canvas.Left="120" Canvas.Top="120"/>
+                                            <Canvas>
+                                                <Line Stroke="Transparent" StrokeThickness="5" X1="150" Y1="150" X2="150" Y2="10"
+                                MouseLeftButtonUp="Ellipse_MouseLeftButtonUp"/>
+                                                <Ellipse Width="30" Height="30" Canvas.Left="140" Canvas.Top="0"
+                                MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"
+                                    MouseLeftButtonUp="Ellipse_MouseLeftButtonUp">
+                                                    <Ellipse.Fill>
+                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                            <GradientStop Color="BlanchedAlmond" Offset="0"/>
+                                                            <GradientStop Color="Aquamarine" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Ellipse.Fill>
+                                                    <Ellipse.ToolTip>
+                                                        <ToolTip>
+                                                            <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                        Path="Value" Converter="{StaticResource valueTextConverter}"/>
+                                                        </ToolTip>
+                                                    </Ellipse.ToolTip>
+                                                </Ellipse>
+                                                <Canvas.RenderTransform>
+                                                    <RotateTransform CenterX="150" CenterY="150">
+                                                        <RotateTransform.Angle>
+                                                            <MultiBinding Converter="{StaticResource valueAngleConverter}">
+                                                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Value"/>
+                                                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Minimum"/>
+                                                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Maximum"/>
+                                                            </MultiBinding>
+                                                        </RotateTransform.Angle>
+                                                    </RotateTransform>
+                                                </Canvas.RenderTransform>
+                                            </Canvas>
+                                        </Canvas>
+                                    </Viewbox>
+                                </ControlTemplate>
+                            </Slider.Template>
+                        </Slider>
+                        <Label x:Name="TabAllTime"  Height="62" VerticalAlignment="Bottom" Margin="559,0,15.812,134" Foreground="White" Grid.RowSpan="2" FontSize="16" Grid.Column="1"/>
+                        <Label x:Name="TabTimeNow" Height="62" VerticalAlignment="Bottom" Margin="241,0,0,134" HorizontalAlignment="Left" Width="82" Foreground="White" Grid.RowSpan="2" FontSize="16" Grid.Column="1"/>
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+
+        </StackPanel>
+        <StackPanel x:Name="SettMenuRight" Grid.Column="1" Margin="0,46,-710,0" HorizontalAlignment="Right" Width="710"  >
+            <Grid Height="209"  >
+                <Border   Margin="3,0,0,-196.584"  Opacity="0.9" >
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF01CBAF" Offset="0"/>
+                            <GradientStop Color="#FF59018B" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <Border.Effect>
+                        <BlurEffect RenderingBias="Quality" Radius="50"/>
+                    </Border.Effect>
+                </Border>
+                <Label Content="{x:Static p:Resources.SettMainLabel}" Height="68.947" Margin="176.353,6,166.353,0" FontSize="29.333" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top" />
+                <Button x:Name="SettingsMenuHide" Content="￫" FontSize="26" Click="SettingsMenuHide_Click" Margin="18,17,0,0" HorizontalAlignment="Left" Width="51"  Height="36.626" VerticalAlignment="Top" Style="{DynamicResource MainButtons}" ></Button>
+                <Button x:Name="SaveButt" Content="{x:Static p:Resources.SettSave}" HorizontalAlignment="Right" Width="121" Height="28.28" VerticalAlignment="Bottom" Margin="0,0,0,-176" Style="{DynamicResource MainButtons}" Click="SaveButt_Click" ></Button>
+
+                <TabControl x:Name="tabControl" Margin="3,58,0,-157" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}"  >
+                    <TabItem Header="{x:Static p:Resources.SettTabCommon}"  Margin="24.5,-2,-24.5,0" FontSize="20" Width="130" BorderThickness="0" Style="{DynamicResource TabButtons}" Height="32.6" VerticalAlignment="Top"  >
+                        <Grid  >
+                            <Label  Content="{x:Static p:Resources.SettUserName}" Margin="18,10,0,217.221" Foreground="White" FontSize="16" HorizontalAlignment="Left" Width="251"/>
+                            <TextBox x:Name="DefaultUserName" Margin="18,37,0,205.487" Background="{x:Null}" Foreground="White" HorizontalAlignment="Left" Width="251">
+                                <TextBox.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                        <GradientStop Color="#FF5100C7" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </TextBox.BorderBrush>
+                            </TextBox>
+
+                            <ComboBox  x:Name="LanguageChoose" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="166.5" Margin="18,0,0,72.027" Foreground="White" Height="33.6" Background="{x:Null}" Style="{DynamicResource ComboBoxLanguageStyle}">
+                                <ComboBoxItem>Русский</ComboBoxItem>
+                                <ComboBoxItem>English</ComboBoxItem>
+                            </ComboBox>
+                            <Label Content="{x:Static p:Resources.SettLanguage}" Margin="19.18,130,0,103.375" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="164.599" Foreground="White" FontSize="16" >
+                                <Label.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="-0.141"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Label.RenderTransform>
+                            </Label>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.SettTabColor}" Margin="48,-2,-48,0"  FontSize="20"  Width="130" Style="{DynamicResource TabButtons}" >
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.SettTabSocial}" Margin="69,-2,-69,0"  FontSize="20"  Width="130" Style="{DynamicResource TabButtons}" >
+                        <Grid Margin="-16,0,0,0" >
+                            <Button x:Name="TeleAuth" Content="LogIn" HorizontalAlignment="Left" Height="65" VerticalAlignment="Top" Width="123" Style="{DynamicResource MainButtons}" Click="TeleAuth_Click" Margin="101,10,0,0">
+                            </Button>
+                            <Button x:Name="TeleDeAuth" Content="LogOut"  HorizontalAlignment="Left" Height="65" Visibility="Visible" VerticalAlignment="Top" Width="122" Style="{DynamicResource MainButtons}" Click="TeleDeAuth_Click" Margin="104,10,0,0"/>
+                            <Button x:Name="AnastasiaAuth" Content="Anastasia" Margin="318,12,251,190" Click="AnastasiaAuth_Click" Style="{DynamicResource MainButtons}"/>
+                            <Button x:Name="TwitterAuth" Content="Twitter" Margin="563,10,2,191" Click="AnastasiaAuth_Click" Style="{DynamicResource MainButtons}"/>
+                            <Button x:Name="AnastasiaUserInfo" Visibility="Hidden" Margin="245,0,201,188" Click="AnastasiaUserInfo_Click" Style="{DynamicResource MainButtons}"/>
+                            <Image x:Name="TelegramPicture" Margin="18,14,614,193" ></Image>
+                            <Image x:Name="AnastasiaPicture" Margin="241,14,391,193" ></Image>
+                            <Border BorderThickness="1" Margin="26,11,491,191" Width="200" Height="65">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF01CBAF" Offset="0"/>
+                                        <GradientStop Color="#FF59018B" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                            </Border>
+                            <Border BorderThickness="1" Margin="233,11,233,191" Height="65" Width="220">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF01CBAF" Offset="0"/>
+                                        <GradientStop Color="#FF59018B" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                            </Border>
+                            <Border BorderThickness="1" Margin="496,11,1,191" Width="220" Height="65">
+                                <Border.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF01CBAF" Offset="0"/>
+                                        <GradientStop Color="#FF59018B" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.BorderBrush>
+                            </Border>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.SettTabSound}" Margin="0,-2,-100,0"  FontSize="20"  HorizontalAlignment="Right" Width="130" Style="{DynamicResource TabButtons}" >
+                        <Grid>
+                            <Label Content="{x:Static p:Resources.SettMusicFolder}" Height="28" VerticalAlignment="Top" Margin="18,15,0,0" Background="{x:Null}" Foreground="White" FontSize="16" HorizontalAlignment="Left" Width="251"/>
+                            <TextBox x:Name="MusicFolder" Margin="18,43,206,198" Background="{x:Null}" Foreground="White">
+                                <TextBox.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                        <GradientStop Color="#FF5100C7" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Button x:Name="ChooseFolderBut" Content="{x:Static p:Resources.SettChooseButton}" HorizontalAlignment="Right" Width="82" Height="25" VerticalAlignment="Top" Margin="0,43,124,0" Style="{DynamicResource MainButtons}" FontSize="16" Click="ChooseFolderBut_Click"></Button>
+                            <TextBox Margin="17,79,204,163" Background="{x:Null}" Foreground="White" FontSize="16" >
+                                <TextBox.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                        <GradientStop Color="#FF5100C7" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <Button x:Name="ResetFavGanre" Content="{x:Static p:Resources.ResetFavouriteGanre}" HorizontalAlignment="Right" Width="82" Height="25" VerticalAlignment="Top" Margin="0,78,120,0" Style="{DynamicResource MainButtons}" FontSize="16" Click="ResetFavGanre_Click"></Button>
+                        </Grid>
+                    </TabItem>
+                </TabControl >
+
+                <Grid  x:Name="AnastasiaLogIn" Visibility="Hidden" >
+                    <Border  Margin="3,0,0,-196.584"  Opacity="0.9">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF01CBAF" Offset="0"/>
+                                <GradientStop Color="#FF59018B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <BlurEffect RenderingBias="Quality" Radius="50"/>
+                        </Border.Effect>
+                    </Border>
+                    <TextBox x:Name="AnastName"  Margin="149,165,149,9" Background="{x:Null}" FontSize="20" Foreground="White">
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+                    </TextBox>
+                    <PasswordBox x:Name="AnastPass" Margin="149,229,149,-54" Background="{x:Null}" FontSize="20" Foreground="White">
+                        <PasswordBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </PasswordBox.BorderBrush>
+                    </PasswordBox>
+                    <Label x:Name="Errors" Margin="0,302,0,-126" Foreground="Red" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <Button x:Name="LogInButton" Content="Войти" Margin="293,268,293,-98" Style="{DynamicResource MainButtons}" FontSize="20" Click="LogInButton_Click" ></Button>
+                    <Label Content="Password" Margin="150,204,402,-22" FontSize="16" Foreground="White" />
+                    <Label Content="Login"  Margin="150,138,402,40" Foreground="White" FontSize="16"></Label>
+                    <Button x:Name="RegisterBut" Content="Зарегистрироваться" Margin="159,361,142,-186" Style="{DynamicResource MainButtons}" Click="RegisterBut_Click" ></Button>
+                    <Button x:Name="CancleLogIn" Content="Назад" Margin="563,361,-1,-186" Style="{DynamicResource MainButtons}" Click="CancleLogIn_Click" ></Button>
+                    <ProgressBar x:Name="LogInBar" Margin="150,126,149,65" Visibility="Hidden" IsIndeterminate="True" Foreground="Indigo" BorderBrush="{x:Null}" Background="{x:Null}"></ProgressBar>
+                </Grid>
+                <Grid  x:Name="AnastasiaRegistration"  Visibility="Hidden">
+                    <Border  Margin="3,0,0,-196.584"  Opacity="1">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF01CBAF" Offset="0"/>
+                                <GradientStop Color="#FF59018B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <BlurEffect RenderingBias="Quality" Radius="50"/>
+                        </Border.Effect>
+
+                    </Border>
+                    <Label Content="Регистрация" Margin="0,0,0,149" Foreground="White" FontSize="36" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+                    <TextBox  x:Name="NewLogin" Margin="18,91,342,88" Background="{x:Null}" FontSize="20" Foreground="White" Width="350" Height="30">
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+                    </TextBox>
+                    <TextBox  x:Name="NewName" Margin="18,143,342,36" Background="{x:Null}" FontSize="20" Foreground="White" Height="30" Width="350">
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+                    </TextBox>
+                    <TextBox  x:Name="NewSurName" Margin="18,197,342,-18" Background="{x:Null}" FontSize="20" Foreground="White" Width="350" Height="30">
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+                    </TextBox>
+                    <PasswordBox  x:Name="NewPass"  Margin="18,247,342,-68" Background="{x:Null}" FontSize="20" Foreground="White" Width="350" Height="30">
+                        <PasswordBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </PasswordBox.BorderBrush>
+                    </PasswordBox>
+                    <PasswordBox  x:Name="NewRepeatPass" Margin="20,301,341,-122" Background="{x:Null}" FontSize="20" Foreground="White" Height="30">
+                        <PasswordBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </PasswordBox.BorderBrush>
+                    </PasswordBox>
+                    <TextBox  x:Name="NewEmail" Margin="380,91,1,88" Background="{x:Null}" FontSize="20" Foreground="White" Height="30">
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+                    </TextBox>
+                    <TextBox  x:Name="newCity" Margin="380,142,1,37" Background="{x:Null}" FontSize="20" Foreground="White" Height="30">
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+                    </TextBox>
+                    <Label Content="Логин" Margin="17,66,609,116" Foreground="White" FontSize="16"></Label>
+                    <Label Content="Имя" Margin="19,120,607,61" Foreground="White" FontSize="16"></Label>
+                    <Label Content="Фамилия" Margin="18,173,608,7" Foreground="White" FontSize="16"></Label>
+                    <Label Content="Пароль" Margin="18,222,608,-43" Foreground="White" FontSize="16"></Label>
+                    <Label Content="Повторите пароль" Margin="18,276,540,-97" Foreground="White" FontSize="16"></Label>
+                    <Label Content="Е-mail" Margin="378,67,248,115" Foreground="White" FontSize="16"></Label>
+                    <Label Content="Пол" Margin="381,224,245,-42" Foreground="White" FontSize="16"></Label>
+                    <Label Content="Город" Margin="378,119,248,63" Foreground="White" FontSize="16"></Label>
+                    <Label Content="Должность" Margin="553,221,63,-42" Foreground="White" FontSize="16"></Label>
+                    <ComboBox x:Name="Sex" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="166" Margin="382,0,0,-68" Foreground="White" Height="29" Background="{x:Null}" Style="{DynamicResource ComboBoxLanguageStyle}">
+                        <ComboBoxItem>Ж</ComboBoxItem>
+                        <ComboBoxItem>М</ComboBoxItem>
+                    </ComboBox>
+                    <ComboBox x:Name="Position" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="155" Margin="553,0,0,-68" Foreground="White" Height="29" Background="{x:Null}" Style="{DynamicResource ComboBoxLanguageStyle}">
+                        <ComboBoxItem>Администратор</ComboBoxItem>
+                        <ComboBoxItem>Разработчик</ComboBoxItem>
+                        <ComboBoxItem>Дизайнер</ComboBoxItem>
+                        <ComboBoxItem>Пользователь</ComboBoxItem>
+                        <ComboBoxItem>Тестировщик</ComboBoxItem>
+                    </ComboBox>
+                    <Button x:Name="CancleReg" Content="Отмена" Margin="8,362,580,-193" Style="{DynamicResource MainButtons}" Click="CancleReg_Click"></Button>
+                    <Button x:Name="Registration" Content="Зарегистрироваться" Margin="584,362,4,-193" Style="{DynamicResource MainButtons}" Click="Registration_Click"></Button>
+                    <TextBox  x:Name="NewAvatar" Margin="380,195,55,-16" Background="{x:Null}" FontSize="20" Foreground="White" Height="30">
+                        <TextBox.BorderBrush>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                <GradientStop Color="#FF5100C7" Offset="1"/>
+                            </LinearGradientBrush>
+                        </TextBox.BorderBrush>
+                    </TextBox>
+                    <Button Content="Выбрать" x:Name="ChooseAvatar" Margin="662,195,-1,-14" Style="{DynamicResource MainButtons}" Click="ChooseAvatar_Click"></Button>
+                    <Label Content="Аватар"  Foreground="White" FontSize="16" Margin="377,172,261,4"/>
+                </Grid>
+                <Grid x:Name="SuccReg" Visibility="Hidden">
+                    <Border  Margin="3,0,0,-196.584"  Opacity="1">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF01CBAF" Offset="0"/>
+                                <GradientStop Color="#FF59018B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <BlurEffect RenderingBias="Quality" Radius="50"/>
+                        </Border.Effect>
+                    </Border>
+                    <TextBox Margin="1,73,-1,-73" Text="Регистрация успешно завершена. &#xD;&#xA;                                         Спасибо!" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="40"  IsEnabled="False">
+                    </TextBox >
+                    <Button x:Name="FinishReg" Content="Завершить" Margin="545,343,19,-192" Style="{DynamicResource MainButtons}" FontSize="18" Click="FinishReg_Click" Background="{x:Null}"></Button>
+                </Grid>
+                <Grid x:Name="SuccLogIn" Visibility="Hidden">
+                    <Border  Margin="3,0,0,-196.584"  Opacity="1">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF01CBAF" Offset="0"/>
+                                <GradientStop Color="#FF59018B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Effect>
+                            <BlurEffect RenderingBias="Quality" Radius="50"/>
+                        </Border.Effect>
+                    </Border>
+                    <TextBox Margin="1,73,-1,-73" Text="Вы успешно вошли в систему. &#xD;&#xA;                                         Спасибо!" Foreground="White" Background="{x:Null}" BorderBrush="{x:Null}" FontSize="40" IsEnabled="False">
+                    </TextBox>
+                    <Button x:Name="FinishLogIn" Content="Завершить" Margin="545,343,19,-192" Style="{DynamicResource MainButtons}" FontSize="18" Click="FinishReg_Click" Background="{x:Null}"></Button>
+                </Grid>
+                <Grid Name="userinfodb" Visibility="Hidden">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="17*"/>
+                        <RowDefinition Height="192*"/>
+                    </Grid.RowDefinitions>
+                    <Border Margin="0,0,0,-192" Height="401" VerticalAlignment="Top" Grid.RowSpan="2">
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FF01CBAF" Offset="0"/>
+                                <GradientStop Color="#FF59018B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+
+
+
+                    </Border>
+                    <Label Foreground="White" Content="Дата регистрации" Margin="230,205,308,-48" FontSize="20" Grid.Row="1" Height="35"/>
+                    <Label Foreground="White" Content="Позиция" Margin="230,135,371,22" FontSize="20" Grid.Row="1" Height="35"/>
+                    <Label Foreground="White" Content="Почта" Margin="230,170,368,-13" FontSize="20" Grid.Row="1"/>
+                    <Label Foreground="White" Content="Любимый жанр" Margin="230,241,310,-84" FontSize="20" Grid.Row="1" Height="35"/>
+                    <TextBlock Name="Uname" Margin="234,13,25,140" Grid.Row="1" Foreground="White" FontSize="24" />
+                    <TextBlock Name="Post" Margin="413,176,1,-19" Grid.Row="1"  Foreground="White" FontSize="18" Height="35"/>
+                    <TextBlock Name="Uregdate" Margin="413,212,1,-55" Grid.Row="1" Foreground="White" FontSize="18" Height="35" />
+                    <TextBlock Name="Uposition" Margin="413,141,3,16" Grid.Row="1" Foreground="White" FontSize="18" Height="35" />
+                    <TextBlock Name="ufavganre" Margin="413,247,-8,-90" Grid.Row="1" Foreground="White" FontSize="18" Height="35" />
+                    <Label Foreground="White" Content="Город" Margin="230,62,395,89" FontSize="20" Grid.Row="1" Height="35"/>
+                    <Label Foreground="White" Content="Пол" Margin="230,100,394,57" FontSize="20" Grid.Row="1" Height="35"/>
+                    <TextBlock x:Name="ucity" Margin="413,71,1,86" Grid.Row="1" Foreground="White" FontSize="18" Height="35" />
+                    <TextBlock x:Name="ugender" Margin="413,106,1,51" Grid.Row="1" Foreground="White" FontSize="18" Height="35" />
+                    <Image x:Name="UserAvatar" Margin="20,13,490,-21" Grid.Row="1" Width="200" Height="200" Stretch="Uniform" />
+                    <my:CircularProgressBar x:Name="AvatarLoadBar" Background="Aquamarine" Foreground="#FF00E2C3" BorderBrush="Cyan"  Margin="22,14,491,-18" Grid.Row="1" Value="0" Maximum="100" Minimum="0" Style="{DynamicResource circularProgressBar}" ></my:CircularProgressBar>
+                    <Button x:Name="UserInfoExit" Margin="611,339,3,-180" Grid.Row="1" Content="Закрыть" Style="{DynamicResource MainButtons}" FontSize="18" Click="UserInfoExit_Click"></Button>
+                    <Button x:Name="ComAddRequest" Margin="253,339,223,-180" Grid.Row="1" Content="Добавить команду" Style="{DynamicResource MainButtons}" FontSize="18" Click="ComAddRequest_Click"></Button>
+                    <Button x:Name="BugReport" Margin="15,339,504,-180" Grid.Row="1" Content="Сообщить о баге" Style="{DynamicResource MainButtons}" FontSize="18" Click="BugReport_Click"></Button>
+
+                </Grid>
+            </Grid>
+
+        </StackPanel>
+
+
+    </Grid>
+</Window>

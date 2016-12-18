@@ -1,0 +1,41 @@
+﻿<Window x:Class="AnastasiaAssistant.MainLogic.Telgram.TelegramAuth"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnastasiaAssistant.MainLogic.Telgram"
+        mc:Ignorable="d"
+        Title="TelegramAuth" Height="200" Width="340" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None" >
+
+    <StackPanel>
+        <Grid x:Name="PhonePanel" Visibility="Visible">
+            <TextBox x:Name="TelegramPhone" HorizontalAlignment="Left" Margin="10,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Width="320" Height="24" />
+            <Label Content="Your Phone" Margin="114,22,114,126" FontSize="20"   HorizontalAlignment="Center" ></Label>
+            <Label x:Name="ErrorMess" Content="" Margin="0,55,0,129" FontSize="12"  HorizontalAlignment="Center" Foreground="Red" ></Label>
+        </Grid>
+        <Grid x:Name="CodePanel" Margin="0,-180,0,0" Height="183" Visibility="Hidden">
+            <TextBox x:Name="TelegramCode" HorizontalAlignment="Left" Margin="98,60,0,0" VerticalAlignment="Top" Width="144" Height="20"/>
+            <Label Content="Your Code" Margin="114,16,114,128" FontSize="20" HorizontalAlignment="Center" ></Label>
+        </Grid>
+        <Grid x:Name="ButtonGrid" Visibility="Visible">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="143*"/>
+                <ColumnDefinition Width="197*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="PhoneCheck"  Content="NEXT" HorizontalAlignment="Center" Margin="96,-101,94,346" VerticalAlignment="Center" Width="150" Click="PhoneCheck_Click" Height="36" BorderBrush="White" Background="#FF6389A8" Foreground="White" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="NoteMess" TextWrapping="Wrap" Text="Note: If you don't have a Telegram account yet, please sing up with your IOS/Android" Margin="50,-57,50,276" Grid.ColumnSpan="2"></TextBlock>
+        </Grid>
+        <Grid Height="24">
+            <Border  x:Name="TelegramBorder" Margin="0,-495,0,489" Background="#FF6389A8" MouseLeftButtonDown="TelegramBorder_MouseLeftButtonDown"/>
+            <Image x:Name="Telepng" Margin="3,-492,310,490"  Stretch="Fill" RenderTransformOrigin="0.7,2.733"/>
+            <Button x:Name="Close" Content="X" Margin="304,-495,0,489" Background="#FF6389A8" Click="Close_Click"></Button>
+        </Grid>
+        <Grid x:Name="AuthYes" Visibility="Hidden">
+            <Label Margin="48,-422,48,392" FontSize="20" HorizontalAlignment="Center"  Content="Вход Успешно выполнен!"></Label>
+            <Button x:Name="ExitButton" Content="EXIT" Margin="115,-380,115,355" Click="ExitClick_Click" Height="36" BorderBrush="White" Background="#FF00B9FF" Foreground="White"></Button>
+        </Grid>
+    </StackPanel>
+
+</Window>
+
