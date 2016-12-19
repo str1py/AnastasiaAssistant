@@ -84,159 +84,173 @@
                         <DropShadowEffect Color="Azure" Opacity="10" ShadowDepth="5"/>
                     </Border.Effect>
                 </Border>
-                <Button x:Name="SettingsMenuShow" Content="{x:Static p:Resources.SettingsButton}" Margin="0,6,622,4.28" Click="SettingsMenuShow_Click" Style="{DynamicResource MainButtons}" />
-              
+                <Button x:Name="SettingsMenuShow" Content="{x:Static p:Resources.SettingsButton}" Margin="617,5,5,2.28" Click="SettingsMenuShow_Click" Style="{DynamicResource MainButtons}" />
+
 
 
             </Grid>
         </StackPanel>
         <StackPanel Margin="0,83,0,0" Height="367" VerticalAlignment="Top" Grid.ColumnSpan="2" >
             <TabControl Height="353.961" Margin="0,14,0.333,0" Background="{x:Null}" BorderBrush="{x:Null}">
-                <TabItem Header="Anastasia" Style="{DynamicResource TabButtons}" Margin="11,0,-11,0">
-                    <Grid HorizontalAlignment="Left" Width="311">
-                        <TextBox x:Name="UserMessage" Margin="10,298,0,5.956" Height="22.045" Background="{x:Null}" HorizontalAlignment="Left" Width="299.667" Foreground="White" KeyDown="UserMessage_KeyDown" Grid.ColumnSpan="2" PreviewKeyDown="UserMessage_PreviewKeyDown" >
-                            <TextBox.BorderBrush>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="#FF00E2C3" Offset="0"/>
-                                    <GradientStop Color="#FF5100C7" Offset="1"/>
-                                </LinearGradientBrush>
-                            </TextBox.BorderBrush>
-                        </TextBox>
-                        <ListView x:Name="MainChat" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Height="135" Background="{x:Null}" 
-                      Margin="5,160.5,0,30.5" IsEnabled="False" Foreground="White"  BorderBrush="{x:Null}" ItemTemplateSelector="{StaticResource TS}"
-                      ItemsSource="{Binding TempSelect}" Style="{DynamicResource ListViewStyle}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="304" d:LayoutOverrides="VerticalAlignment, TopMargin, BottomMargin" Grid.ColumnSpan="2" >
-                            <ListView.RenderTransform>
-                                <TransformGroup>
-                                    <ScaleTransform/>
-                                    <SkewTransform AngleY="-0.09"/>
-                                    <RotateTransform/>
-                                    <TranslateTransform Y="-0.248"/>
-                                </TransformGroup>
-                            </ListView.RenderTransform>
-                        </ListView>
-                        <Label x:Name="UserCommand"  Height="37"  Margin="0,-5.5,0.333,294.5" Foreground="White" FontSize="16" HorizontalAlignment="Right" Grid.Column="1" d:LayoutOverrides="TopMargin, BottomMargin"  />
-                        <Button  x:Name="SendButt" Content="{x:Static p:Resources.SendMessageButton}" Height="22.162"  Margin="232.5,295.919,0,7.919" Style="{DynamicResource MainButtons}" Click="SendButt_Click" HorizontalAlignment="Left" Width="74.667" d:LayoutOverrides="TopMargin, BottomMargin"/>
-                        <Label x:Name="UserCommandShow" Margin="0,149,4,147" Foreground="White" FontSize="16" FontFamily="Adobe Caslon Pro Bold" HorizontalAlignment="Right" Grid.Column="1"  />
-                    </Grid>
 
-                </TabItem>
-                <TabItem x:Name="MusTabItem" Header="{x:Static p:Resources.TabMusic}" Margin="46,-2,-46,0" Style="{DynamicResource TabButtons}" HorizontalAlignment="Left" Width="60" Visibility="Hidden">
-                    <Grid Margin="-2.812,0,0,-1.833">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52*"/>
-                            <ColumnDefinition Width="645*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="159*"/>
-                            <RowDefinition Height="169*"/>
-                        </Grid.RowDefinitions>
-                        <ListView x:Name="PlayList" Margin="1,28,424.812,-2" Background="{x:Null}" BorderBrush="{x:Null}" Style="{DynamicResource PlayList}" ItemTemplate="{DynamicResource PlayListItems}" MouseDoubleClick="PlayList_MouseDoubleClick" Visibility="Visible" Grid.RowSpan="2" Grid.ColumnSpan="2"  />
-                        <Label Content="{x:Static p:Resources.TabMusicPlayListLabel}" Height="29" VerticalAlignment="Top" Margin="1,3,0,0" Foreground="White" FontSize="16" HorizontalAlignment="Left" Width="80" Grid.Column="1" />
-                        <Ellipse Margin="328,51,101.812,62" Grid.RowSpan="2" Grid.Column="1">
-                            <Ellipse.Fill>
-                                <ImageBrush x:Name="TabMusicSongPicture" Stretch="Fill"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <Label x:Name="TabMusicArtist" Height="37" VerticalAlignment="Top" Margin="228,-6,3.812,0" FontSize="21.333" Foreground="White" FontFamily="Source Sans Pro Black" Grid.Column="1"/>
-                        <Label x:Name="TabMusicSong" Height="39" VerticalAlignment="Top" Margin="227,19,4.812,0" FontFamily="Source Sans Pro Semibold" FontSize="14.667" Grid.Column="1">
-                            <Label.Foreground>
-                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                    <GradientStop Color="White" Offset="0"/>
-                                    <GradientStop Color="#FF62FFEA" Offset="1"/>
-                                </LinearGradientBrush>
-                            </Label.Foreground>
-                        </Label>
-                        <Slider x:Name="sliderVol" Margin="322,0,84.812,5" Value="50" Maximum="100" Height="14" ValueChanged="sliderVol_ValueChanged" Style="{DynamicResource SliderStyle}" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1"/>
-                        <Button x:Name="TabMusicNext" Content="Next" Margin="0,0,86.812,43" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="40" Click="TabMusicNext_Click" Grid.Row="1" Grid.Column="1"/>
-                        <Button x:Name="TabMusicPrev" Content="Prev" Height="30" Margin="0,0,285.812,42" VerticalAlignment="Bottom" Style="{DynamicResource MainButtons}" Click="TabMusicPrev_Click" HorizontalAlignment="Right" Width="40" Grid.Row="1" Grid.Column="1"/>
-                        <Button x:Name="TabMusicPlay" Content="Play" Height="40" Margin="0,0,167.812,17" VerticalAlignment="Bottom" Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="75" Click="TabMusicPlay_Click" Grid.Row="1" Grid.Column="1"/>
-                        <Button x:Name="TabMusicPause" Content="Pause" Height="40" VerticalAlignment="Bottom" Margin="0,0,167.812,16" Visibility="Hidden" Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="75" Click="TabMusicPause_Click" Grid.Row="1" Grid.Column="1"/>
-                        <Border BorderBrush="AliceBlue" BorderThickness="0,0,1,1" Margin="0,140,-288.188,-37" HorizontalAlignment="Right" Width="228" Grid.RowSpan="2" Grid.Column="1" >
-                            <Border.Effect>
-                                <DropShadowEffect Color="Maroon" Opacity="10" BlurRadius="4" />
-                            </Border.Effect>
-                        </Border>
-
-                        <Slider Name="sliderTrack"  Value="1" Height="237" Width="231"
-        HorizontalAlignment="Center" VerticalAlignment="Center" Margin="320,40,93.812,51" Grid.RowSpan="2" Background="AliceBlue" Foreground="AliceBlue" Grid.Column="1">
-                            <Slider.Template>
-                                <ControlTemplate>
-                                    <Viewbox>
-                                        <Canvas Width="300" Height="300" Margin="5">
-                                            <Ellipse Fill="Transparent" Width="300" Height="300" Canvas.Left="0" Canvas.Top="0" StrokeThickness="10"
-                            MouseLeftButtonUp="Ellipse_MouseLeftButtonUp" >
-                                                <Ellipse.Stroke>
-                                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                        <GradientStop Color="#FF59018B" Offset="0"/>
-                                                        <GradientStop Color="#FF01CBAF" Offset="1"/>
-                                                    </LinearGradientBrush>
-                                                </Ellipse.Stroke>
-                                            </Ellipse>
-                                            <Ellipse Fill="Transparent" Width="60" Height="60" Canvas.Left="120" Canvas.Top="120"/>
-                                            <Canvas>
-                                                <Line Stroke="Transparent" StrokeThickness="5" X1="150" Y1="150" X2="150" Y2="10"
-                                MouseLeftButtonUp="Ellipse_MouseLeftButtonUp"/>
-                                                <Ellipse Width="30" Height="30" Canvas.Left="140" Canvas.Top="0"
-                                MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"
-                                    MouseLeftButtonUp="Ellipse_MouseLeftButtonUp">
-                                                    <Ellipse.Fill>
-                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                                            <GradientStop Color="BlanchedAlmond" Offset="0"/>
-                                                            <GradientStop Color="Aquamarine" Offset="1"/>
-                                                        </LinearGradientBrush>
-                                                    </Ellipse.Fill>
-                                                    <Ellipse.ToolTip>
-                                                        <ToolTip>
-                                                            <Binding RelativeSource="{RelativeSource TemplatedParent}"
-                        Path="Value" Converter="{StaticResource valueTextConverter}"/>
-                                                        </ToolTip>
-                                                    </Ellipse.ToolTip>
-                                                </Ellipse>
-                                                <Canvas.RenderTransform>
-                                                    <RotateTransform CenterX="150" CenterY="150">
-                                                        <RotateTransform.Angle>
-                                                            <MultiBinding Converter="{StaticResource valueAngleConverter}">
-                                                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Value"/>
-                                                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Minimum"/>
-                                                                <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Maximum"/>
-                                                            </MultiBinding>
-                                                        </RotateTransform.Angle>
-                                                    </RotateTransform>
-                                                </Canvas.RenderTransform>
-                                            </Canvas>
-                                        </Canvas>
-                                    </Viewbox>
-                                </ControlTemplate>
-                            </Slider.Template>
-                        </Slider>
-                        <Label x:Name="TabAllTime"  Height="62" VerticalAlignment="Bottom" Margin="559,0,15.812,134" Foreground="White" Grid.RowSpan="2" FontSize="16" Grid.Column="1"/>
-                        <Label x:Name="TabTimeNow" Height="62" VerticalAlignment="Bottom" Margin="241,0,0,134" HorizontalAlignment="Left" Width="82" Foreground="White" Grid.RowSpan="2" FontSize="16" Grid.Column="1"/>
-                    </Grid>
-                </TabItem>
             </TabControl>
         </StackPanel>
-        <StackPanel x:Name="Updates">
-            <Grid Margin="322,90,0,0" Height="361"></Grid>
-            <TabControl Margin="322,-400,0,0" Background="{x:Null}" BorderBrush="{x:Null}" Height="381">
-                <TabItem Header="Функционал" Style="{DynamicResource TabButtons}" Margin="78,0,-78,0">
-                    <Grid>
-                        <TextBlock Text="Команды" Margin="36,20,2,299" FontSize="24"></TextBlock>
-                    <ListView x:Name="HelpListCommands" Margin="38,49,4,-8" Background="{x:Null}" Foreground="White" BorderBrush="White"/>
-                    </Grid>
-                </TabItem>
-                <TabItem x:Name="UpdatesButton" Header="{x:Static p:Resources.UpdateButton}"  Style="{DynamicResource TabButtons}" Margin="86,0,-86,0"  >
-                    <Grid>
-                     <TextBlock Text="Обновление программы" Margin="71,23,37,296" FontSize="20" FontWeight="Bold"></TextBlock>
-                     <Image Margin="10,15,304,287" Width="35" Height="35" Source="pack://application:,,,/AnastasiaRes/Social/AA_logo_On.png"></Image>
-                        <TextBlock x:Name="CurrectVersion" Margin="22,78,0,242" FontSize="14"></TextBlock>
-                        <TextBlock x:Name="LastCheckUpdate" Margin="22,106,0,214" FontSize="14"></TextBlock>
-                        <Button x:Name="CheckUpdateButton" Content="Проверить наличие обновлений" Margin="72,166,47,150" Style="{DynamicResource MainButtons}" Click="CheckUpdateButton_Click" FontSize="16"></Button>
-                    </Grid>
-                </TabItem>
-                <TabItem Header="{x:Static p:Resources.AboutButton}" Style="{DynamicResource TabButtons}"  Margin="102,0,-102,0">
+        <StackPanel x:Name="Updates" Visibility="Visible">
+            <Grid Margin="322,90,0,0" Height="361">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="149*"/>
+                    <ColumnDefinition Width="40*"/>
+                </Grid.ColumnDefinitions>
 
-                </TabItem>
-            </TabControl>
+                <TabControl Margin="-318,-30,0,10" Background="{x:Null}" BorderBrush="{x:Null}" Height="381">
+                    <TabItem x:Name="AnastasiaTab" Header="Anastasia" Style="{DynamicResource TabButtons}" Margin="11,0,-11,0">
+                        <Grid Margin="0,0,-2,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="101*"/>
+                                <ColumnDefinition Width="103*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="UserMessage" Margin="2,0,0,6" Height="23" Background="{x:Null}" HorizontalAlignment="Left" Width="300" Foreground="White" KeyDown="UserMessage_KeyDown" VerticalAlignment="Bottom"  >
+                                <TextBox.BorderBrush>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="#FF00E2C3" Offset="0"/>
+                                        <GradientStop Color="#FF5100C7" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </TextBox.BorderBrush>
+                            </TextBox>
+                            <ListView x:Name="MainChat" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="{x:Null}" 
+                      Margin="3,180,0,36" IsEnabled="False" Foreground="White"  BorderBrush="{x:Null}" ItemTemplateSelector="{StaticResource TS}"
+                      ItemsSource="{Binding TempSelect}" Style="{DynamicResource ListViewStyle}" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" Width="295" >
+                                <ListView.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform AngleY="-0.09"/>
+                                        <RotateTransform/>
+                                        <TranslateTransform Y="-0.248"/>
+                                    </TransformGroup>
+                                </ListView.RenderTransform>
+                            </ListView>
+                            <Label x:Name="UserCommand"  Margin="0,142,251,172" Foreground="White" FontSize="16"  />
+                            <Button  x:Name="SendButt" Content="{x:Static p:Resources.SendMessageButton}"  Margin="228,323,0,6" Style="{DynamicResource MainButtons}" Click="SendButt_Click" HorizontalAlignment="Left" Width="75"/>
+                            <Label x:Name="UserCommandShow" Margin="121,173,10,141" Foreground="White" FontSize="16" FontFamily="Adobe Caslon Pro Bold" HorizontalAlignment="Right"  />
+                        </Grid>
+
+                    </TabItem>
+                    <TabItem x:Name="MusTabItem" Header="{x:Static p:Resources.TabMusic}" Margin="0,0,-24,0" Style="{DynamicResource TabButtons}" HorizontalAlignment="Right" Width="60" Visibility="Hidden" Height="22" VerticalAlignment="Top" >
+                        <Grid Margin="-2.812,0,0,-1.833">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="27*"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="645*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="87*"/>
+                                <RowDefinition Height="84*"/>
+                                <RowDefinition Height="182*"/>
+                            </Grid.RowDefinitions>
+                            <ListView x:Name="PlayList" Margin="1,28,425,-2" Background="{x:Null}" BorderBrush="{x:Null}" Style="{DynamicResource PlayList}" ItemTemplate="{DynamicResource PlayListItems}" MouseDoubleClick="PlayList_MouseDoubleClick" Visibility="Visible" Grid.RowSpan="3" Grid.ColumnSpan="4"  />
+                            <Label Content="{x:Static p:Resources.TabMusicPlayListLabel}" Height="29" VerticalAlignment="Top" Margin="1,3,0,0" Foreground="White" FontSize="16" HorizontalAlignment="Left" Width="80" Grid.Column="3" />
+                            <Ellipse Margin="328,51,102,62" Grid.RowSpan="3" Grid.Column="3">
+                                <Ellipse.Fill>
+                                    <ImageBrush x:Name="TabMusicSongPicture" Stretch="Fill"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <Label x:Name="TabMusicArtist" Height="37" VerticalAlignment="Top" Margin="228,-6,4,0" FontSize="21.333" Foreground="White" FontFamily="Source Sans Pro Black" Grid.Column="3"/>
+                            <Label x:Name="TabMusicSong" Height="39" VerticalAlignment="Top" Margin="227,19,5,0" FontFamily="Source Sans Pro Semibold" FontSize="14.667" Grid.Column="3">
+                                <Label.Foreground>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="#FF62FFEA" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Label.Foreground>
+                            </Label>
+                            <Slider x:Name="sliderVol" Margin="322,0,85,5" Value="50" Maximum="100" Height="14" ValueChanged="sliderVol_ValueChanged" Style="{DynamicResource SliderStyle}" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="3"/>
+                            <Button x:Name="TabMusicNext" Content="Next" Margin="0,0,87,43" Height="30" VerticalAlignment="Bottom" Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="40" Click="TabMusicNext_Click" Grid.Row="2" Grid.Column="3"/>
+                            <Button x:Name="TabMusicPrev" Content="Prev" Height="30" Margin="0,0,286,42" VerticalAlignment="Bottom" Style="{DynamicResource MainButtons}" Click="TabMusicPrev_Click" HorizontalAlignment="Right" Width="40" Grid.Row="2" Grid.Column="3"/>
+                            <Button x:Name="TabMusicPlay" Content="Play" Height="40" Margin="0,0,168,17" VerticalAlignment="Bottom" Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="75" Click="TabMusicPlay_Click" Grid.Row="2" Grid.Column="3"/>
+                            <Button x:Name="TabMusicPause" Content="Pause" Height="40" VerticalAlignment="Bottom" Margin="0,0,168,16" Visibility="Hidden" Style="{DynamicResource MainButtons}" HorizontalAlignment="Right" Width="75" Click="TabMusicPause_Click" Grid.Row="2" Grid.Column="3"/>
+
+                            <Slider Name="sliderTrack"  Value="1" Height="238" Width="231"
+        HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,52,68,63" Grid.RowSpan="3" Background="AliceBlue" Foreground="AliceBlue" Grid.Column="3">
+                                <Slider.Template>
+                                    <ControlTemplate>
+                                        <Viewbox>
+                                            <Canvas Width="300" Height="300" Margin="5">
+                                                <Ellipse Fill="Transparent" Width="300" Height="300" Canvas.Left="0" Canvas.Top="0" StrokeThickness="10"
+                            MouseLeftButtonUp="Ellipse_MouseLeftButtonUp" >
+                                                    <Ellipse.Stroke>
+                                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                            <GradientStop Color="#FF59018B" Offset="0"/>
+                                                            <GradientStop Color="#FF01CBAF" Offset="1"/>
+                                                        </LinearGradientBrush>
+                                                    </Ellipse.Stroke>
+                                                </Ellipse>
+                                                <Ellipse Fill="Transparent" Width="60" Height="60" Canvas.Left="120" Canvas.Top="120"/>
+                                                <Canvas>
+                                                    <Line Stroke="Transparent" StrokeThickness="5" X1="150" Y1="150" X2="150" Y2="10"
+                                MouseLeftButtonUp="Ellipse_MouseLeftButtonUp"/>
+                                                    <Ellipse Width="30" Height="30" Canvas.Left="140" Canvas.Top="0"
+                                MouseLeftButtonDown="Ellipse_MouseLeftButtonDown"
+                                    MouseLeftButtonUp="Ellipse_MouseLeftButtonUp">
+                                                        <Ellipse.Fill>
+                                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                                <GradientStop Color="BlanchedAlmond" Offset="0"/>
+                                                                <GradientStop Color="Aquamarine" Offset="1"/>
+                                                            </LinearGradientBrush>
+                                                        </Ellipse.Fill>
+                                                        <Ellipse.ToolTip>
+                                                            <ToolTip>
+                                                                <Binding RelativeSource="{RelativeSource TemplatedParent}"
+                        Path="Value" Converter="{StaticResource valueTextConverter}"/>
+                                                            </ToolTip>
+                                                        </Ellipse.ToolTip>
+                                                    </Ellipse>
+                                                    <Canvas.RenderTransform>
+                                                        <RotateTransform CenterX="150" CenterY="150">
+                                                            <RotateTransform.Angle>
+                                                                <MultiBinding Converter="{StaticResource valueAngleConverter}">
+                                                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Value"/>
+                                                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Minimum"/>
+                                                                    <Binding RelativeSource="{RelativeSource TemplatedParent}" Path="Maximum"/>
+                                                                </MultiBinding>
+                                                            </RotateTransform.Angle>
+                                                        </RotateTransform>
+                                                    </Canvas.RenderTransform>
+                                                </Canvas>
+                                            </Canvas>
+                                        </Viewbox>
+                                    </ControlTemplate>
+                                </Slider.Template>
+                            </Slider>
+                            <Label x:Name="TabAllTime"  Height="62" VerticalAlignment="Bottom" Margin="559,0,16,134" Foreground="White" Grid.RowSpan="2" FontSize="16" Grid.Column="3" Grid.Row="1"/>
+                            <Label x:Name="TabTimeNow" Height="62" VerticalAlignment="Bottom" Margin="241,0,0,134" HorizontalAlignment="Left" Width="82" Foreground="White" Grid.RowSpan="2" FontSize="16" Grid.Column="3" Grid.Row="1"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="Функционал" Style="{DynamicResource TabButtons}" Margin="78,0,-78,0">
+                        <Grid Margin="0,0,0,-9">
+                            <TextBlock Text="Команды" Margin="36,20,2,299" FontSize="24"></TextBlock>
+                            <ListView x:Name="HelpListCommands" Margin="38,49,4,10" Background="{x:Null}" Foreground="White" BorderBrush="White"/>
+                        </Grid>
+                    </TabItem>
+                    <TabItem x:Name="UpdatesButton" Header="{x:Static p:Resources.UpdateButton}"  Style="{DynamicResource TabButtons}" Margin="86,0,-86,0"  >
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="24*"/>
+                                <ColumnDefinition Width="15*"/>
+                                <ColumnDefinition Width="12*"/>
+                                <ColumnDefinition Width="587*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Обновление программы" Margin="20,23,37,296" FontSize="20" FontWeight="Bold" Grid.Column="3"></TextBlock>
+                            <Image Margin="103,22,448,294" Width="35" Height="35" Source="pack://application:,,,/AnastasiaRes/Social/AA_logo_On.png" Grid.Column="3"></Image>
+                            <TextBlock x:Name="CurrectVersion" Margin="22,78,0,242" FontSize="14" Grid.ColumnSpan="4"></TextBlock>
+                            <TextBlock x:Name="LastCheckUpdate" Margin="22,106,0,214" FontSize="14" Grid.ColumnSpan="4"></TextBlock>
+                            <Button x:Name="CheckUpdateButton" Content="Проверить наличие обновлений" Margin="21,166,47,150" Style="{DynamicResource MainButtons}" Click="CheckUpdateButton_Click" FontSize="16" Grid.Column="3"></Button>
+                        </Grid>
+                    </TabItem>
+                    <TabItem Header="{x:Static p:Resources.AboutButton}" Style="{DynamicResource TabButtons}"  Margin="102,0,-102,0">
+                    </TabItem>
+                </TabControl>
+            </Grid>
         </StackPanel>
         <StackPanel x:Name="SettMenuRight" Grid.Column="1" Margin="0,46,-710,0" HorizontalAlignment="Right" Width="710"  >
             <Grid Height="209"  >
