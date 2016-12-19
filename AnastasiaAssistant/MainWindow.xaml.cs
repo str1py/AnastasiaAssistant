@@ -115,9 +115,8 @@ namespace AnastasiaAssistant
         }
         private void FillCommandList()
         {
-            string path = Directory.GetCurrentDirectory();
             Encoding enc = Encoding.GetEncoding(1251);
-            StreamReader f = new StreamReader(path + @"\Commands.txt",enc);
+            StreamReader f = new StreamReader(System.Windows.Forms.Application.StartupPath + @"\Commands.txt",enc);
             string[] a = f.ReadToEnd().Split('\n');
             foreach (var K in a)
             {
@@ -640,12 +639,9 @@ namespace AnastasiaAssistant
             }
         }
 
-
         #endregion
 
-
-
-  
+      
     }
     public class ValueAngleConverter : IMultiValueConverter
     {
