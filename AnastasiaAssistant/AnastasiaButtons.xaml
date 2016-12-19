@@ -7,6 +7,7 @@
     <my:AngleToPointConverter x:Key="prConverter"/>
     <my:AngleToIsLargeConverter x:Key="isLargeConverter"/>
 
+    
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -629,25 +630,6 @@
         </Setter>
     </Style>
 
-
-    <DataTemplate x:Key="PlayListItems">
-        <StackPanel Width="233" Height="33" VirtualizingStackPanel.VirtualizationMode="Recycling">
-            <Border Margin="0,0,0,0" BorderThickness="0,0,0,1"  BorderBrush="#FFFFFEFE" Height="33" Background="{x:Null}" >
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="6" ShadowDepth="5" Color="Honeydew"/>
-                </Border.Effect>
-             </Border>
-            <Ellipse HorizontalAlignment="Left" Margin="2,-32,0,0" Width="30" Height="30">
-                <Ellipse.Fill>
-                    <ImageBrush  x:Name="SongPict" ImageSource="{Binding SongPict}" />
-                </Ellipse.Fill>
-            </Ellipse>
-            <TextBlock x:Name="ArtName" Text="{Binding ArtName}" Margin="40,-45,0,0" Height="16" Width="Auto" Foreground="White"></TextBlock>
-            <TextBlock x:Name="SongName" Text="{Binding SongName}" Margin="40,-22,0,0" Height="15" Width="Auto" Foreground="White"></TextBlock>
-
-        </StackPanel>
-    </DataTemplate>
-
     <Style x:Key="circularProgressBar" TargetType="my:CircularProgressBar">
         <Setter Property="Value" Value="10"/>
         <Setter Property="Maximum" Value="100"/>
@@ -686,4 +668,22 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <DataTemplate x:Key="PlayListItems">
+        <StackPanel Width="233" Height="33" VirtualizingStackPanel.VirtualizationMode="Recycling">
+            <Border Margin="0,0,0,0" BorderThickness="0,0,0,1"  BorderBrush="#FFFFFEFE" Height="33" Background="{x:Null}" >
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="6" ShadowDepth="5" Color="Honeydew"/>
+                </Border.Effect>
+            </Border>
+            <Ellipse HorizontalAlignment="Left" Margin="2,-32,0,0" Width="30" Height="30">
+                <Ellipse.Fill>
+                    <ImageBrush  x:Name="SongPict" ImageSource="{Binding SongPict}" />
+                </Ellipse.Fill>
+            </Ellipse>
+            <TextBlock x:Name="ArtName" Text="{Binding ArtName}" Margin="40,-45,0,0" Height="16" Width="Auto" Foreground="White"></TextBlock>
+            <TextBlock x:Name="SongName" Text="{Binding SongName}" Margin="40,-22,0,0" Height="15" Width="Auto" Foreground="White"></TextBlock>
+
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>
