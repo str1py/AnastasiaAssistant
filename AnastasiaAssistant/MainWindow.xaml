@@ -215,18 +215,18 @@
                         <ListView x:Name="HelpListCommands" Margin="38,49,4,0" Background="{x:Null}" Foreground="White" BorderBrush="White" Height="295" VerticalAlignment="Top"/>
                     </Grid>
                 </TabItem>
-                <TabItem x:Name="UpdatesButton" Header="{x:Static p:Resources.UpdateButton}"  Style="{DynamicResource TabButtons}" Margin="222,5,-222,-5"  >
+                <TabItem x:Name="UpdatesButton" Header="{x:Static p:Resources.UpdateButton}"  Style="{DynamicResource TabButtons}" Margin="222,5,-222,-5" Height="20" VerticalAlignment="Top"  >
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="13*"/>
                             <ColumnDefinition Width="609*"/>
                         </Grid.ColumnDefinitions>
                         <TextBlock Text="Обновление программы" Margin="47,29,312,303" FontSize="20" FontWeight="Bold" Grid.Column="1"></TextBlock>
-                        <Image Margin="1,27,556,303" Source="pack://application:,,,/AnastasiaRes/Social/AA_logo_On.png" Grid.Column="1"/>
+                        <Image Margin="4,27,619,303" Source="pack://application:,,,/AnastasiaRes/Social/AA_logo_On.png" Grid.ColumnSpan="2"/>
                         <TextBlock x:Name="CurrectVersion" Margin="3,78,312,249" FontSize="14" Grid.Column="1"/>
                         <TextBlock x:Name="LastCheckUpdate" Margin="3,106,312,226" FontSize="14" Grid.Column="1"/>
-                        <Button x:Name="CheckUpdateButton" Content="Проверить наличие обновлений" Margin="0,164,312,152" Style="{DynamicResource MainButtons}" Click="CheckUpdateButton_Click" FontSize="16" Grid.Column="1"/>
-                        <TextBox Margin="313,72,0,34" Background="{x:Null}" Foreground="White" Text="2.0.4.9&#xA;-Реализован запуск программы без интернета&#xD;&#xA;-Добавлен AnastasiaAccount&#xA;-Изменено главное меню&#xA;-Добавлен список команд&#xA;-Незначительные фиксы&#xA;" BorderBrush="Black" Grid.Column="1"/>
+                        <Button x:Name="CheckUpdateButton" Content="Проверить наличие обновлений" Margin="0,159,366,157" Style="{DynamicResource MainButtons}" Click="CheckUpdateButton_Click" FontSize="16" Grid.Column="1"/>
+                        <TextBox Margin="313,96,0,10" Background="{x:Null}" Foreground="White" Text="2.0.4.9&#xA;-Реализован запуск программы без интернета&#xA;-Добавлена иконка приложения&#xA;-Изменено главное меню&#xA;-Добавлен список команд&#xA;-Незначительные фиксы&#xA;&#xA;2.0.3.9&#xA;-Создана база данных для регистрации пользователей&#xA;-Добавлена форма входа/регистрации AnasastasiaAccount&#xA;-AnastasiaAssistant локально собирает данные о любимом&#xD;&#xA; жанре&#xA;-Добавлена форма обновления приложение(обновления&#xA; не работают)&#xA;&#xA;2.0.1.9&#xA;-Добавлен плеер сверху приложения&#xA;-Добавлено несколько комманд&#xA;-Исправлены проблемы с Telegram&#xA;&#xA;2.0.0.0&#xA;-Добавлено управление с помошью Telegram&#xA;-Полностью изменен дизайн&#xA;-Исправлены проблемы с плеером&#xA;-Изменен алгорит поиска команды&#xA;-Добавлены команды" BorderBrush="Black" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Grid.Column="1"/>
                         <Label Content="Change Log" Margin="385,33,38,285" Foreground="White" FontSize="24" Grid.Column="1" ></Label>
                     </Grid>
                 </TabItem>
