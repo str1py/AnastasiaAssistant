@@ -13,6 +13,7 @@ using AnastasiaAssistant.BassPlayer;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Updater;
 
 namespace AnastasiaAssistant
 {
@@ -41,6 +42,7 @@ namespace AnastasiaAssistant
             Un4seen.Bass.BassNet.Registration("stripyclear@gmail.com", "2X28183721152222");
             main.AddComands();
             CheckAndInfoAdd();
+        
         }
 
         public void CheckAndInfoAdd()
@@ -72,6 +74,7 @@ namespace AnastasiaAssistant
             else
                 LastCheckUpdate.Text = "Последняя проверка : " + AnastasiaAssistant.Properties.Settings.Default.LastUpdateCheck;
             FillCommandList();
+            changelog.Text = Properties.Settings.Default.changelog;
         }
 
         #region AppMethods
@@ -109,11 +112,57 @@ namespace AnastasiaAssistant
         #region rightMenu
         private void CheckUpdateButton_Click(object sender, RoutedEventArgs e)
         {
-
-            Properties.Settings.Default.LastUpdateCheck = DateTime.Now.ToString();
-            Properties.Settings.Default.Save();
+            CheckUpdateButton.Visibility = System.Windows.Visibility.Hidden;
+            AnastasiaAssistant.AutoUpdare.Update au = new AutoUpdare.Update();
+            VersionMessage.Text =  au.CompareVersions();    
+            if (au.newversion==true)
+            {
+                DownloadNowButton.Visibility = System.Windows.Visibility.Visible;
+            }
         }
-        private void FillCommandList()
+        async private void DownloadNowButton_Click(object sender, RoutedEventArgs e)
+        {
+            DownloadNowButton.Visibility = System.Windows.Visibility.Hidden;
+            DownloadMessages.Visibility = System.Windows.Visibility.Visible;
+            downloadPB.Visibility = System.Windows.Visibility.Visible;
+            Downloadlog.Visibility = System.Windows.Visibility.Visible;
+            AnastasiaAssistant.AutoUpdare.Update au = new AutoUpdare.Update();
+            DownloadMessages.Content = "Соединяюсь с сервером...";
+            await Task.Delay(3000);
+            downloadPB.Value = +20;
+  
+            DownloadMessages.Content = "Получаю версии файлов...";
+            au.GetFilesInfo();
+            downloadPB.Value = downloadPB.Value = +20;
+            await Task.Delay(3000);
+            DownloadMessages.Content = "Сравниваю версии файлов";
+            au.CompareFilesVersions();
+            DownloadMessages.Content = "Скачиваю файлы...";
+            downloadPB.Value = downloadPB.Value + 20;
+            await Task.Delay(3000);
+       
+            DownloadMessages.Content = au.Download();
+            downloadPB.Value =downloadPB.Value + 20;
+            await Task.Delay(3000);
+               
+        
+            DownloadMessages.Content = "Просматриваю ChangeLog...";     
+            downloadPB.Value = downloadPB.Value + 20;
+            await Task.Delay(3000);
+
+            downloadPB.Value = downloadPB.Value + 20;
+            DownloadMessages.Content = "Программа перезапустится через 5 секунд...";
+
+            await Task.Delay(5000);
+            string path = System.IO.Directory.GetCurrentDirectory();
+            Properties.Settings.Default.changelog = au.GetChangelog();
+            Properties.Settings.Default.Save();
+        
+            System.Diagnostics.Process.Start(path + @"/Updater.exe");
+            Environment.Exit(0);
+
+        }
+    private void FillCommandList()
         {
             string path = System.IO.Directory.GetCurrentDirectory();
             Encoding enc = Encoding.GetEncoding(1251);
@@ -125,7 +174,8 @@ namespace AnastasiaAssistant
             }
         }
         #endregion
-            #region SettingsMenu
+
+        #region SettingsMenu
         private void ShowHideSettingsMenu(string Storyboard, System.Windows.Controls.Button btnHide, System.Windows.Controls.Button btnShow, StackPanel pnl)
         {
             Storyboard sb = Resources[Storyboard] as Storyboard;
@@ -646,6 +696,13 @@ namespace AnastasiaAssistant
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void ResetDefault_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.LastUpdateCheck = "";
+            Properties.Settings.Default.changelog = "";
+            Properties.Settings.Default.Save();
         }
     }
     public class ValueAngleConverter : IMultiValueConverter

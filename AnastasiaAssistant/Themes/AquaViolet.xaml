@@ -7,7 +7,7 @@
     <my:AngleToPointConverter x:Key="prConverter"/>
     <my:AngleToIsLargeConverter x:Key="isLargeConverter"/>
 
-    
+
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
