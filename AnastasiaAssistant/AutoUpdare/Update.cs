@@ -225,6 +225,14 @@ namespace AnastasiaAssistant.AutoUpdare
             }
             return htmlCode;
         }
+        public void GetCommandList()
+        {
+            using (WebClient client = new WebClient())
+            {
+                client.Credentials = new NetworkCredential(Login, Password);
+                client.DownloadString(AnastasiaURL + "Commands.txt");
+            }
+        }
         public async void DownloadStatus(string message)
         {
             await MainWindow.Instance.Downloadlog.Dispatcher.BeginInvoke(new Action(delegate ()

@@ -69,12 +69,16 @@ namespace AnastasiaAssistant
             Uri imagePlayUri1 = (new Uri(@"pack://application:,,,/AnastasiaRes/Social/AA_logo_Off.png", UriKind.Absolute));
             AnastasiaPicture.Source = new BitmapImage(imagePlayUri1);
             CurrectVersion.Text = "Установленная версия : " + System.Windows.Forms.Application.ProductVersion;
+
             if (String.IsNullOrEmpty(AnastasiaAssistant.Properties.Settings.Default.LastUpdateCheck))
                 LastCheckUpdate.Text = "Последняя проверка : никогда не проводилась";
             else
                 LastCheckUpdate.Text = "Последняя проверка : " + AnastasiaAssistant.Properties.Settings.Default.LastUpdateCheck;
+
             FillCommandList();
-            changelog.Text = Properties.Settings.Default.changelog;
+
+            if (String.IsNullOrEmpty(Properties.Settings.Default.changelog) == false)
+                changelog.Text = Properties.Settings.Default.changelog;
         }
 
         #region AppMethods
@@ -127,6 +131,7 @@ namespace AnastasiaAssistant
             downloadPB.Visibility = System.Windows.Visibility.Visible;
             Downloadlog.Visibility = System.Windows.Visibility.Visible;
             AnastasiaAssistant.AutoUpdare.Update au = new AutoUpdare.Update();
+
             DownloadMessages.Content = "Соединяюсь с сервером...";
             await Task.Delay(3000);
             downloadPB.Value = +20;
@@ -135,8 +140,10 @@ namespace AnastasiaAssistant
             au.GetFilesInfo();
             downloadPB.Value = downloadPB.Value = +20;
             await Task.Delay(3000);
+
             DownloadMessages.Content = "Сравниваю версии файлов";
             au.CompareFilesVersions();
+
             DownloadMessages.Content = "Скачиваю файлы...";
             downloadPB.Value = downloadPB.Value + 20;
             await Task.Delay(3000);
@@ -146,23 +153,28 @@ namespace AnastasiaAssistant
             await Task.Delay(3000);
                
         
-            DownloadMessages.Content = "Просматриваю ChangeLog...";     
-            downloadPB.Value = downloadPB.Value + 20;
+            DownloadMessages.Content = "Просматриваю ChangeLog...";
+            Properties.Settings.Default.changelog = au.GetChangelog();
+            downloadPB.Value = downloadPB.Value + 10;
+            await Task.Delay(3000);
+
+            DownloadMessages.Content = "Смотрю список комманд...";
+            au.GetCommandList();
+            downloadPB.Value = downloadPB.Value + 10;
             await Task.Delay(3000);
 
             downloadPB.Value = downloadPB.Value + 20;
             DownloadMessages.Content = "Программа перезапустится через 5 секунд...";
-
             await Task.Delay(5000);
+
             string path = System.IO.Directory.GetCurrentDirectory();
-            Properties.Settings.Default.changelog = au.GetChangelog();
             Properties.Settings.Default.Save();
         
             System.Diagnostics.Process.Start(path + @"/Updater.exe");
             Environment.Exit(0);
 
         }
-    private void FillCommandList()
+        private void FillCommandList()
         {
             string path = System.IO.Directory.GetCurrentDirectory();
             Encoding enc = Encoding.GetEncoding(1251);
