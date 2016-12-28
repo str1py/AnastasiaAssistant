@@ -166,5 +166,17 @@ namespace AnastasiaAssistant.Properties {
                 this["LastUpdateCheck"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string changelog {
+            get {
+                return ((string)(this["changelog"]));
+            }
+            set {
+                this["changelog"] = value;
+            }
+        }
     }
 }

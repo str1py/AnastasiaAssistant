@@ -17,9 +17,10 @@ using AnastasiaAssistant.MainLogic;
 namespace AnastasiaAssistant.BassPlayer
 {
 
-    public class  BassNetHelper
-    {
+    public partial class  BassNetHelper
+    { 
         System.Windows.Threading.DispatcherTimer dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+     
         System.Windows.Threading.DispatcherTimer songNameChange = new System.Windows.Threading.DispatcherTimer();
         protected ObservableCollection<PlayList> playlist = new ObservableCollection<PlayList>();
 
@@ -108,26 +109,6 @@ namespace AnastasiaAssistant.BassPlayer
             }
             return false;
         }
-        protected static void PlayRadio(string radioulr, float vol)
-        {
-            if (Bass.BASS_ChannelIsActive(Stream) != BASSActive.BASS_ACTIVE_PAUSED)
-            {
-                Stop();
-                if (InitBass(HZ))
-                {
-                    Stream = Bass.BASS_StreamCreateURL(radioulr, 0, BASSFlag.BASS_STREAM_STATUS, null, IntPtr.Zero);
-                    if (Stream != 0)
-                    {
-                        Volume = vol;
-                        Bass.BASS_ChannelSetAttribute(Stream, BASSAttribute.BASS_ATTRIB_VOL, Volume / 100F);
-                        Bass.BASS_ChannelPlay(Stream, false);
-                    }
-                }
-            }
-            else
-                Bass.BASS_ChannelPlay(Stream, false);
-            isStopped = false;
-        }
         #endregion  
 
         #region Кнопки
@@ -158,7 +139,7 @@ namespace AnastasiaAssistant.BassPlayer
             if (Files.Count != 0)
             {
                 PlayListMethods playlistcl = new PlayListMethods();
-                timerStart();
+                TimerStart();
                 playlistcl.PlayListFill();
                 string current = Files[CurrentTrackNumber];
                 Play(current, Volume);
@@ -189,7 +170,7 @@ namespace AnastasiaAssistant.BassPlayer
             {
                 MainWindow.Instance.Play.Visibility = System.Windows.Visibility.Hidden;
                 MainWindow.Instance.Pause.Visibility = System.Windows.Visibility.Visible;
-                timerStart();
+                TimerStart();
                 CurrentTrackNumber += 1;
                 string current = Files[CurrentTrackNumber];
                 Play(current, Volume);
@@ -200,7 +181,8 @@ namespace AnastasiaAssistant.BassPlayer
             {
                 MainWindow.Instance.Play.Visibility = System.Windows.Visibility.Hidden;
                 MainWindow.Instance.Pause.Visibility = System.Windows.Visibility.Visible;
-                timerStart();
+                TimerStart();
+                dispatcherTimer.Start();
                 CurrentTrackNumber = alltrackscount - 1;
                 string current = Files[alltrackscount - 1];
                 Play(current, Volume);
@@ -216,7 +198,7 @@ namespace AnastasiaAssistant.BassPlayer
             {
                 MainWindow.Instance.Play.Visibility = System.Windows.Visibility.Hidden;
                 MainWindow.Instance.Pause.Visibility = System.Windows.Visibility.Visible;
-                timerStart();
+                TimerStart();
                 CurrentTrackNumber = 0;
                 string current = Files[CurrentTrackNumber];
                 Play(current, Volume);
@@ -227,7 +209,7 @@ namespace AnastasiaAssistant.BassPlayer
             {
                 MainWindow.Instance.Play.Visibility = System.Windows.Visibility.Hidden;
                 MainWindow.Instance.Pause.Visibility = System.Windows.Visibility.Visible;
-                timerStart();
+                TimerStart();
                 CurrentTrackNumber -= 1;
                 string current = Files[CurrentTrackNumber];
                 Play(current, Volume);
@@ -238,18 +220,45 @@ namespace AnastasiaAssistant.BassPlayer
         }
         public void ExitPlayer()
         {
-            Stop();
             timerStop();
+            Stop();
             Bass.BASS_StreamFree(Stream);
             MainLogic.MainVars.musicplayagain = 0;
             Files.Clear();
+            MainWindow.Instance.PlayList.ItemsSource = null;
             MainWindow.Instance.PlayerStack.Visibility = System.Windows.Visibility.Hidden;
             MainWindow.Instance.ProgramName.Visibility = System.Windows.Visibility.Visible;
         }
         #endregion
 
+        #region RadioButtons
+        public void PlayFromURL(string url, float vol)
+        {
+            if (Bass.BASS_ChannelIsActive(Stream) != BASSActive.BASS_ACTIVE_PAUSED)
+            {
+                Stop();
+                if (InitBass(HZ))
+                {
+                    Stream = Bass.BASS_StreamCreateURL(url, 0, BASSFlag.BASS_DEFAULT, null, IntPtr.Zero);
+                    if (Stream != 0)
+                    {
+                        Volume = vol;
+                        Bass.BASS_ChannelSetAttribute(Stream, BASSAttribute.BASS_ATTRIB_VOL, Volume / 100F);
+                        Bass.BASS_ChannelPlay(Stream, false);
+                    }
+                }
+            }
+        }
+        public void StopUrlStream()
+        {
+            Stop();
+        }
+
+        #endregion
+
         #region Timer
-        private void timerStart()
+  
+        private void TimerStart()
         {
             dispatcherTimer.Tick += new EventHandler(timerTick);
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 500);
@@ -257,6 +266,7 @@ namespace AnastasiaAssistant.BassPlayer
         }
         private void timerStop()
         {
+          dispatcherTimer.IsEnabled = false;
             dispatcherTimer.Stop();
         }
         public void timerTick(object sender, EventArgs e)

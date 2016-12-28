@@ -33,7 +33,6 @@ namespace AnastasiaAssistant.MainLogic.Social.Anastasia
             {
                 string avatarname = Path.GetFileName(avatarpath);
                 FtpWebRequest request = (FtpWebRequest)WebRequest.Create("ftp://waws-prod-bay-029.ftp.azurewebsites.windows.net/Avatars/" + avatarname);
-                // устанавливаем метод на загрузку файлов
                 request.Method = WebRequestMethods.Ftp.UploadFile;
 
                 request.Credentials = new NetworkCredential("str1pyblog", "mSsEtm23NixhpbDTbtCqq2owmRELkHxenMFnNMe5w01gj2yHTB8Qm16ZJ6kT");

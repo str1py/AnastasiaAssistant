@@ -15,6 +15,7 @@ namespace AnastasiaAssistant
     {
         App()
         { 
+
             if (AnastasiaAssistant.Properties.Settings.Default.Language == 0)
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo("ru-RU");
     

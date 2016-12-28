@@ -6,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Xml.Linq;
 
 namespace AnastasiaAssistant.MainLogic
 {
@@ -49,6 +51,7 @@ namespace AnastasiaAssistant.MainLogic
                     bass.PlayButton();
                     MainWindow.Instance.MusTabItem.Visibility = System.Windows.Visibility.Visible;
                     MainVars.musicplayagain++;
+                    MainWindow.Instance.PlayerVisibility();
                 }
             }
             else
@@ -140,7 +143,6 @@ namespace AnastasiaAssistant.MainLogic
             select.SelectTemplate(SAData, null);
 
         }
-
         public void SimpleFavGanre()
         {
             Dictionary<string, int> genres = new Dictionary<string, int>()
@@ -189,6 +191,15 @@ namespace AnastasiaAssistant.MainLogic
             }
         }
 
+        public void PlayRadio()
+        {
+            MainWindow.Instance.RadioVisibility();
+        }
+        public void StopRadio()
+        {
+            bass.StopUrlStream();
+        }
+
         #region devhelp
         public void AddNewCommands(string command)
         {
@@ -220,8 +231,8 @@ namespace AnastasiaAssistant.MainLogic
             commands.Add("день недели", dayofweek);
 
             commands.Add("музыка", PlayMusic); commands.Add("включи музыку", PlayMusic); commands.Add("включи плеер", PlayMusic);
-         //   commands.Add("радио", Radio); commands.Add("выключи радио", RadioStop);
-
+            commands.Add("радио", PlayRadio); commands.Add("выключи радио", StopRadio);
+        
             commands.Add("след", PlayNextSong); commands.Add("следующий", PlayNextSong);
             commands.Add("пред", PlayPrevSong); commands.Add("предыдущий", PlayPrevSong);
             commands.Add("пауза", SongPause);

@@ -7,7 +7,7 @@
     <my:AngleToPointConverter x:Key="prConverter"/>
     <my:AngleToIsLargeConverter x:Key="isLargeConverter"/>
 
-    
+
     <Style x:Key="FocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -670,7 +670,7 @@
     </Style>
 
     <DataTemplate x:Key="PlayListItems">
-        <StackPanel Width="233" Height="33" VirtualizingStackPanel.VirtualizationMode="Recycling">
+        <StackPanel Width="260" Height="33" VirtualizingStackPanel.VirtualizationMode="Recycling">
             <Border Margin="0,0,0,0" BorderThickness="0,0,0,1"  BorderBrush="#FFFFFEFE" Height="33" Background="{x:Null}" >
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="6" ShadowDepth="5" Color="Honeydew"/>

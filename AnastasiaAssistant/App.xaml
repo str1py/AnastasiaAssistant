@@ -7,7 +7,8 @@
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="AnastasiaButtons.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Themes/AquaViolet.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Themes/BlackWhite.xaml"/>
                 <ResourceDictionary Source="Simple Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

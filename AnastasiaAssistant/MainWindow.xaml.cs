@@ -13,6 +13,8 @@ using AnastasiaAssistant.BassPlayer;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Updater;
+using AnastasiaAssistant.MainLogic;
 
 namespace AnastasiaAssistant
 {
@@ -30,6 +32,8 @@ namespace AnastasiaAssistant
         AnswersLogic.TempSelect select = new AnswersLogic.TempSelect();
         AnswersLogic.Templates.SimpleAnswer SAData = new AnswersLogic.Templates.SimpleAnswer();
         BassPlayer.BassNetData songdata = new BassPlayer.BassNetData();
+        BassPlayer.Radio.PlayStation ps = new BassPlayer.Radio.PlayStation();
+        BassPlayer.Radio.StationListFill fill = new BassPlayer.Radio.StationListFill();
         #endregion
 
         public MainWindow()
@@ -41,6 +45,7 @@ namespace AnastasiaAssistant
             Un4seen.Bass.BassNet.Registration("stripyclear@gmail.com", "2X28183721152222");
             main.AddComands();
             CheckAndInfoAdd();
+        
         }
 
         public void CheckAndInfoAdd()
@@ -67,11 +72,16 @@ namespace AnastasiaAssistant
             Uri imagePlayUri1 = (new Uri(@"pack://application:,,,/AnastasiaRes/Social/AA_logo_Off.png", UriKind.Absolute));
             AnastasiaPicture.Source = new BitmapImage(imagePlayUri1);
             CurrectVersion.Text = "Установленная версия : " + System.Windows.Forms.Application.ProductVersion;
+
             if (String.IsNullOrEmpty(AnastasiaAssistant.Properties.Settings.Default.LastUpdateCheck))
                 LastCheckUpdate.Text = "Последняя проверка : никогда не проводилась";
             else
                 LastCheckUpdate.Text = "Последняя проверка : " + AnastasiaAssistant.Properties.Settings.Default.LastUpdateCheck;
+
             FillCommandList();
+
+            if (String.IsNullOrEmpty(Properties.Settings.Default.changelog) == false)
+                changelog.Text = Properties.Settings.Default.changelog;
         }
 
         #region AppMethods
@@ -109,9 +119,63 @@ namespace AnastasiaAssistant
         #region rightMenu
         private void CheckUpdateButton_Click(object sender, RoutedEventArgs e)
         {
+            CheckUpdateButton.Visibility = System.Windows.Visibility.Hidden;
+            AnastasiaAssistant.AutoUpdare.Update au = new AutoUpdare.Update();
+            VersionMessage.Text =  au.CompareVersions();    
+            if (au.newversion==true)
+            {
+                DownloadNowButton.Visibility = System.Windows.Visibility.Visible;
+            }
+        }
+        async private void DownloadNowButton_Click(object sender, RoutedEventArgs e)
+        {
+            DownloadNowButton.Visibility = System.Windows.Visibility.Hidden;
+            DownloadMessages.Visibility = System.Windows.Visibility.Visible;
+            downloadPB.Visibility = System.Windows.Visibility.Visible;
+            Downloadlog.Visibility = System.Windows.Visibility.Visible;
+            AnastasiaAssistant.AutoUpdare.Update au = new AutoUpdare.Update();
 
-            Properties.Settings.Default.LastUpdateCheck = DateTime.Now.ToString();
+            DownloadMessages.Content = "Соединяюсь с сервером...";
+            await Task.Delay(3000);
+            downloadPB.Value = +20;
+  
+            DownloadMessages.Content = "Получаю версии файлов...";
+            au.GetFilesInfo();
+            downloadPB.Value = downloadPB.Value = +20;
+            await Task.Delay(3000);
+
+            DownloadMessages.Content = "Сравниваю версии файлов";
+            au.CompareFilesVersions();
+
+            DownloadMessages.Content = "Скачиваю файлы...";
+            downloadPB.Value = downloadPB.Value + 20;
+            await Task.Delay(3000);
+       
+            DownloadMessages.Content = au.Download();
+            downloadPB.Value =downloadPB.Value + 20;
+            await Task.Delay(3000);
+               
+        
+            DownloadMessages.Content = "Просматриваю ChangeLog...";
+            Properties.Settings.Default.changelog = au.GetChangelog();
+            downloadPB.Value = downloadPB.Value + 10;
+            await Task.Delay(3000);
+
+            DownloadMessages.Content = "Смотрю список комманд...";
+            au.GetCommandList();
+            downloadPB.Value = downloadPB.Value + 10;
+            await Task.Delay(3000);
+
+            downloadPB.Value = downloadPB.Value + 20;
+            DownloadMessages.Content = "Программа перезапустится через 5 секунд...";
+            await Task.Delay(5000);
+
+            string path = System.IO.Directory.GetCurrentDirectory();
             Properties.Settings.Default.Save();
+        
+            System.Diagnostics.Process.Start(path + @"/Updater.exe");
+            Environment.Exit(0);
+
         }
         private void FillCommandList()
         {
@@ -125,7 +189,8 @@ namespace AnastasiaAssistant
             }
         }
         #endregion
-            #region SettingsMenu
+
+        #region SettingsMenu
         private void ShowHideSettingsMenu(string Storyboard, System.Windows.Controls.Button btnHide, System.Windows.Controls.Button btnShow, StackPanel pnl)
         {
             Storyboard sb = Resources[Storyboard] as Storyboard;
@@ -437,7 +502,7 @@ namespace AnastasiaAssistant
         }
         #endregion
 
-        #region TabItem Music
+        #region TabItem Player
         private void PlayList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             bass.PlayFromPlayList(PlayList.SelectedIndex);
@@ -464,6 +529,95 @@ namespace AnastasiaAssistant
             System.Windows.Forms.MessageBox.Show("Сброс успешно завершен");
         }
 
+
+        #endregion
+
+        #region TabItemRadio
+
+        public void AddStations(string station)
+        {
+            RadioStationsList.Items.Add(station);
+        }
+        private void StationsGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RadioStationsList.Items.Clear();
+            switch (StationsGroup.SelectedIndex)
+            {
+                case 0: fill.RecordStationsFill();break;
+                case 1: fill.MoscowStationsFill(); break;
+            }
+        }
+        private void RadioStationsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ps.Getindex(RadioStationsList.SelectedIndex);
+            bass.PlayFromURL(BassPlayer.Radio.PlayStation.URL, 50);
+            ps.GetStationInfo();
+            SetStationInfo();
+            StopRadio.Visibility = Visibility.Visible;
+        }
+        private void PlayRadio_Click(object sender, RoutedEventArgs e)
+        {
+            bass.PlayFromURL(BassPlayer.Radio.PlayStation.URL, 50);
+            PlayRadio.Visibility = Visibility.Hidden;
+            StopRadio.Visibility = Visibility.Visible;
+        }
+        private void StopRadio_Click(object sender, RoutedEventArgs e)
+        {
+            PlayRadio.Visibility = Visibility.Visible;
+            StopRadio.Visibility = Visibility.Hidden;
+            bass.StopUrlStream();
+        }
+        public void SetStationInfo()
+        {
+            RadioStationName.Content = BassPlayer.Radio.PlayStation.StationName;
+            TrackArtist.Content = BassPlayer.Radio.PlayStation.TrackArtist;
+            TrackName.Content = BassPlayer.Radio.PlayStation.TrackName;
+            ChannelInfo.Content = BassPlayer.Radio.PlayStation.ChannelInfo;
+        }
+        private void ChangeToRadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            RadioVisibility();
+        }
+        private void ChangeToPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.MusicFolder == null || String.IsNullOrEmpty(Properties.Settings.Default.MusicFolder))
+            {
+                MainVars.AnastasiaAnswer = "Вы не выбрали папку!";
+                select.SelectTemplate(SAData, null);
+                MainTab.SelectedIndex = 0 ;
+            }
+            else
+            {
+                bass.StopUrlStream();
+                bass.PlayButton();
+                PlayerVisibility();
+            }
+        }
+        public void RadioVisibility()
+        {
+            bass.ExitPlayer();
+            fill.RecordStationsFill();
+          
+            PlayerGrid.Visibility = Visibility.Hidden;
+            ChangeToPlayerMessageGrid.Visibility = Visibility.Visible;
+
+            RadioGrid.Visibility = Visibility.Visible;
+            ChangeToRadioMessageGrid.Visibility = Visibility.Hidden;
+
+            ps.Getindex(0);   
+            bass.PlayFromURL(BassPlayer.Radio.PlayStation.URL, 50);
+            ps.GetStationInfo();
+            SetStationInfo();
+            StopRadio.Visibility = Visibility.Visible;
+        }
+        public void PlayerVisibility()
+        {
+            PlayerGrid.Visibility = Visibility.Visible;
+            ChangeToPlayerMessageGrid.Visibility = Visibility.Hidden;
+
+            RadioGrid.Visibility = Visibility.Hidden;
+            ChangeToRadioMessageGrid.Visibility = Visibility.Visible;
+        }
 
         #endregion
 
@@ -643,9 +797,18 @@ namespace AnastasiaAssistant
 
         #endregion
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+   
 
+        private void ResetDefault_Click(object sender, RoutedEventArgs e)
+        {
+            Properties.Settings.Default.LastUpdateCheck = "";
+            Properties.Settings.Default.changelog = "";
+            Properties.Settings.Default.Save();
+        }
+
+        private void ProgramName_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
     public class ValueAngleConverter : IMultiValueConverter
