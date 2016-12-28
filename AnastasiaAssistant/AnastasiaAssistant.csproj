@@ -156,8 +156,10 @@
     <Compile Include="AnswersLogic\Templates\AnswerWithPict.cs" />
     <Compile Include="AnswersLogic\Templates\SimpleAnswer.cs" />
     <Compile Include="AutoUpdare\Update.cs" />
-    <Compile Include="BassPlayer\BassNetData.cs" />
-    <Compile Include="BassPlayer\GetFullMusicInfo.cs" />
+    <Compile Include="BassPlayer\Player\BassNetData.cs" />
+    <Compile Include="BassPlayer\Player\GetFullMusicInfo.cs" />
+    <Compile Include="BassPlayer\Radio\PlayStation.cs" />
+    <Compile Include="BassPlayer\Radio\StationListFill.cs" />
     <Compile Include="MainLogic\BugsAndCommands\BugReport.xaml.cs">
       <DependentUpon>BugReport.xaml</DependentUpon>
     </Compile>
@@ -201,7 +203,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BassPlayer\BassNetHelper.cs" />
-    <Compile Include="BassPlayer\PlayList.cs" />
+    <Compile Include="BassPlayer\Player\PlayList.cs" />
     <Compile Include="MainLogic\CommandListInit.cs" />
     <Compile Include="MainLogic\MainVars.cs" />
     <Compile Include="MainLogic\Social\Telegram\BotAnswer.cs" />

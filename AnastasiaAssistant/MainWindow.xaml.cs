@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Updater;
+using AnastasiaAssistant.MainLogic;
 
 namespace AnastasiaAssistant
 {
@@ -31,6 +32,8 @@ namespace AnastasiaAssistant
         AnswersLogic.TempSelect select = new AnswersLogic.TempSelect();
         AnswersLogic.Templates.SimpleAnswer SAData = new AnswersLogic.Templates.SimpleAnswer();
         BassPlayer.BassNetData songdata = new BassPlayer.BassNetData();
+        BassPlayer.Radio.PlayStation ps = new BassPlayer.Radio.PlayStation();
+        BassPlayer.Radio.StationListFill fill = new BassPlayer.Radio.StationListFill();
         #endregion
 
         public MainWindow()
@@ -499,7 +502,7 @@ namespace AnastasiaAssistant
         }
         #endregion
 
-        #region TabItem Music
+        #region TabItem Player
         private void PlayList_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             bass.PlayFromPlayList(PlayList.SelectedIndex);
@@ -526,6 +529,95 @@ namespace AnastasiaAssistant
             System.Windows.Forms.MessageBox.Show("Сброс успешно завершен");
         }
 
+
+        #endregion
+
+        #region TabItemRadio
+
+        public void AddStations(string station)
+        {
+            RadioStationsList.Items.Add(station);
+        }
+        private void StationsGroup_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            RadioStationsList.Items.Clear();
+            switch (StationsGroup.SelectedIndex)
+            {
+                case 0: fill.RecordStationsFill();break;
+                case 1: fill.MoscowStationsFill(); break;
+            }
+        }
+        private void RadioStationsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ps.Getindex(RadioStationsList.SelectedIndex);
+            bass.PlayFromURL(BassPlayer.Radio.PlayStation.URL, 50);
+            ps.GetStationInfo();
+            SetStationInfo();
+            StopRadio.Visibility = Visibility.Visible;
+        }
+        private void PlayRadio_Click(object sender, RoutedEventArgs e)
+        {
+            bass.PlayFromURL(BassPlayer.Radio.PlayStation.URL, 50);
+            PlayRadio.Visibility = Visibility.Hidden;
+            StopRadio.Visibility = Visibility.Visible;
+        }
+        private void StopRadio_Click(object sender, RoutedEventArgs e)
+        {
+            PlayRadio.Visibility = Visibility.Visible;
+            StopRadio.Visibility = Visibility.Hidden;
+            bass.StopUrlStream();
+        }
+        public void SetStationInfo()
+        {
+            RadioStationName.Content = BassPlayer.Radio.PlayStation.StationName;
+            TrackArtist.Content = BassPlayer.Radio.PlayStation.TrackArtist;
+            TrackName.Content = BassPlayer.Radio.PlayStation.TrackName;
+            ChannelInfo.Content = BassPlayer.Radio.PlayStation.ChannelInfo;
+        }
+        private void ChangeToRadioButton_Click(object sender, RoutedEventArgs e)
+        {
+            RadioVisibility();
+        }
+        private void ChangeToPlayer_Click(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.MusicFolder == null || String.IsNullOrEmpty(Properties.Settings.Default.MusicFolder))
+            {
+                MainVars.AnastasiaAnswer = "Вы не выбрали папку!";
+                select.SelectTemplate(SAData, null);
+                MainTab.SelectedIndex = 0 ;
+            }
+            else
+            {
+                bass.StopUrlStream();
+                bass.PlayButton();
+                PlayerVisibility();
+            }
+        }
+        public void RadioVisibility()
+        {
+            bass.ExitPlayer();
+            fill.RecordStationsFill();
+          
+            PlayerGrid.Visibility = Visibility.Hidden;
+            ChangeToPlayerMessageGrid.Visibility = Visibility.Visible;
+
+            RadioGrid.Visibility = Visibility.Visible;
+            ChangeToRadioMessageGrid.Visibility = Visibility.Hidden;
+
+            ps.Getindex(0);   
+            bass.PlayFromURL(BassPlayer.Radio.PlayStation.URL, 50);
+            ps.GetStationInfo();
+            SetStationInfo();
+            StopRadio.Visibility = Visibility.Visible;
+        }
+        public void PlayerVisibility()
+        {
+            PlayerGrid.Visibility = Visibility.Visible;
+            ChangeToPlayerMessageGrid.Visibility = Visibility.Hidden;
+
+            RadioGrid.Visibility = Visibility.Hidden;
+            ChangeToRadioMessageGrid.Visibility = Visibility.Visible;
+        }
 
         #endregion
 
@@ -705,16 +797,18 @@ namespace AnastasiaAssistant
 
         #endregion
 
-        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+   
 
         private void ResetDefault_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.LastUpdateCheck = "";
             Properties.Settings.Default.changelog = "";
             Properties.Settings.Default.Save();
+        }
+
+        private void ProgramName_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
         }
     }
     public class ValueAngleConverter : IMultiValueConverter
