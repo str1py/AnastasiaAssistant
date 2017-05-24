@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+<version>2.1.0.0</version>
+  <BassNetdll>2.4.12.1</BassNetdll>
+  <bassdll>2.4.10</bassdll>
+  <BigMathdll>0.5.0.0</BigMathdll>
+  <MySqlDatadll>6.9.9.0</MySqlDatadll>
+  <policy20taglibsharpdll>0.0.0.0</policy20taglibsharpdll>
+  <taglibsharpdll>2.0.6.9</taglibsharpdll>
+  <TelegramBotdll>10.4.0.0</TelegramBotdll>
+  <TeleSharpTLdll>1.0.0.0</TeleSharpTLdll>
+  <TLSharpCoredll>1.0.0.0</TLSharpCoredll>
+  <lonicZlibdll>2.0.0.14</lonicZlibdll>
+<url>http://anastasiaproject.ru//AnastasiaAssistant.exe</url>
+<changelog>http://anastasiaproject.ru/releasenotes.html</changelog>
+</item>

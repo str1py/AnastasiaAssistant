@@ -1,0 +1,1010 @@
+﻿<Window x:Class="AnastasiaAssistantProject.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AnastasiaAssistantProject"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:t ="clr-namespace:AnastasiaAssistantProject.AnswersLogic"
+        xmlns:my ="clr-namespace:AnastasiaAssistantProject.AnastasiaResources.Elements"
+        mc:Ignorable="d"
+        Title="MainWindow"  Height="450" Width="700" Style="{DynamicResource MainWindowStyle}" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <local:ValueAngleConverter x:Key="valueAngleConverter"/>
+        <local:ValueTextConverter x:Key="valueTextConverter"/>
+
+        <Storyboard x:Key="sbSettingsMenuShow" >
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,-700,0" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:1" />
+        </Storyboard>
+        <Storyboard x:Key="sbSettingsMenuHide">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,0,-700,0" AccelerationRatio=".9" Duration="0:0:1" />
+        </Storyboard>
+     
+        <Storyboard x:Key="sbPopUpMenuShow">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,-50,0,0" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:1" />
+        </Storyboard>
+        <Storyboard x:Key="sbPopUpMenuHide">
+            <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,-50,0,0" AccelerationRatio=".9" Duration="0:0:1" />
+        </Storyboard>
+        
+        <DataTemplate x:Key="SimpleAnswer">
+            <Grid Width="339,2" Height="134" >
+                <TextBlock Text="{Binding Answer}" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="0,17.98,0,6.035" HorizontalAlignment="Left" Foreground="White" FontSize="14" ></TextBlock>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate x:Key="AnswerWithPict">
+            <Grid Width="339,2" Height="134" >
+                <Image x:Name="WeatherBack" Margin="0,30,-180,0"  Source="{Binding WeatherBack}" Width="100" Height="120" ></Image>
+                <TextBlock Text="{Binding Answer}" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="0,17.98,0,6.035" HorizontalAlignment="Left" Foreground="White" FontSize="14" ></TextBlock>
+            </Grid>
+        </DataTemplate>
+        <t:TempSelect          
+                SimpleAnswer="{StaticResource SimpleAnswer}"  
+                AnswerWithPict="{StaticResource AnswerWithPict}"
+                x:Key="TS"/>
+
+    </Window.Resources>
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*" />
+                <RowDefinition Height="33*" />
+                <RowDefinition Height="66*" />
+                <RowDefinition Height="50*" />
+                <RowDefinition Height="50*" />
+                <RowDefinition Height="50*" />
+                <RowDefinition Height="50*" />
+                <RowDefinition Height="50*" />
+                <RowDefinition Height="50*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Viewbox x:Name="ProgramName" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Margin="0.2,0,0,1.4" Visibility="Visible">
+                <Label  FontSize="36" Height="52" Style="{DynamicResource LabelStyle}">Anastasia Assistant
+                </Label>
+            </Viewbox>
+
+            <Viewbox Grid.Row="0" Grid.Column="5" HorizontalAlignment="Right"  >
+                <Button x:Name="CloseApp" Content="x"   FontSize="16" Click="CloseApp_Click" Width="20" Height="25" Style="{DynamicResource MainButtonStyle}"/>
+            </Viewbox>
+
+            <Viewbox  Grid.Row="0" Grid.Column="5"  HorizontalAlignment="Left"   >
+                <Button x:Name="AppDown" Content="_"  FontSize="16"  Click="AppDown_Click" Width="20" Height="25" HorizontalAlignment="Left" Style="{DynamicResource MainButtonStyle}"/>
+            </Viewbox>
+
+            <Viewbox Grid.Row="0" Grid.Column="5" HorizontalAlignment="Center"  >
+                <Button x:Name="Maximize" Content="◻"  Click="Maximize_Click" Width="20" Height="25" Style="{DynamicResource MainButtonStyle}"/>
+            </Viewbox>
+
+            <Border BorderThickness="1"  CornerRadius="65" Grid.ColumnSpan="6 " VerticalAlignment="Top" Grid.Row="1" Height="2" Style="{DynamicResource BorderStyle}" />
+
+            <Border BorderThickness="1"  CornerRadius="65" VerticalAlignment="Bottom" Grid.ColumnSpan="6"  Grid.Row="1" Margin="0" Height="2" Style="{DynamicResource BorderStyle}"/>
+
+        </Grid>
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <TabControl x:Name="MainTab"  Background="{x:Null}" BorderBrush="{x:Null}" Grid.Row="2" Grid.RowSpan="16" Grid.ColumnSpan="6"  >
+                <TabItem  Header="Anastasia" Style="{DynamicResource TabButtons}" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+
+
+                        <Viewbox   Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="16"  VerticalAlignment="Center" >
+                            <TextBox x:Name="UserMessage" Height="20"  KeyDown="UserMessage_KeyDown" PreviewKeyDown="UserMessage_PreviewKeyDown" Width="361" Style="{DynamicResource TextBoxStyle}" />
+                        </Viewbox>
+
+                        <Viewbox  HorizontalAlignment="Right" Grid.Column="2" Grid.Row="10" VerticalAlignment="Center"  >
+                            <Button  x:Name="SendButt" Content="Отправить" FontSize="10" Style="{DynamicResource MainButtonStyle}" Click="SendButt_Click" HorizontalAlignment="Right" />
+                        </Viewbox>
+
+                        <Viewbox Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6" Grid.RowSpan="4">
+                            <ListView x:Name="MainChat" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="{x:Null}" 
+                 IsEnabled="False" Foreground="White"  BorderBrush="{x:Null}" ItemTemplateSelector="{StaticResource TS}"
+                  ItemsSource="{Binding TempSelect}"  HorizontalAlignment="Stretch"  Style="{DynamicResource MainChatStyle}" >
+                            </ListView>
+                        </Viewbox>
+
+                        <Viewbox   Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="5"   HorizontalAlignment="Right" >
+                            <Label x:Name="UserCommand"  Foreground="White"    />
+                        </Viewbox>
+
+                    </Grid>
+                </TabItem>
+                <TabItem  Header="Музыка" Style="{DynamicResource TabButtons}" >
+                    <TabControl  Background="{x:Null}" BorderBrush="{x:Null}" >
+                        <TabItem Header="Плеер" Style="{DynamicResource TabButtons}">
+                            <Grid>
+                                <Grid x:Name="PlayerGrid" Visibility="Visible" Margin="0,4,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition  />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="4" Grid.Row="3" Grid.RowSpan="10" HorizontalAlignment="Right" BorderThickness="1" BorderBrush="Black">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="5"  Color="Black"  />
+                                        </Border.Effect>
+                                     
+                                    </Border>
+                                    <Border Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="12"  VerticalAlignment="Bottom"  BorderThickness="1" BorderBrush="Black">
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="5"  Color="Black"  />
+                                        </Border.Effect>
+                                    </Border>
+                                    
+                                    <Image x:Name="TabMusicSongPicture" Stretch="Fill" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="10" >
+                                    </Image>
+
+
+
+                                    <ListView x:Name="PlayList" Background="{x:Null}" BorderBrush="{x:Null}"  ItemTemplate="{DynamicResource PlayListItems}"
+                                              MouseDoubleClick="PlayList_MouseDoubleClick" Visibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" 
+                                          Grid.Row="2" Grid.RowSpan="14" Grid.ColumnSpan="2"  />
+                                    <Viewbox Grid.Column="0"  Grid.Row="1"  >
+                                        <Label Content="Плэйлист" Style="{DynamicResource LabelStyle}"   Foreground="White" FontSize="15" Height="27"   />
+                                    </Viewbox>
+
+                                    <Viewbox Grid.Column="2" Grid.ColumnSpan="4"  Grid.Row="13" >
+                                        <Slider Name="sliderTrack"  Value="1"  Background="AliceBlue" Foreground="AliceBlue" Width="400" Style="{DynamicResource TrackSlider}" ValueChanged="sliderTrack_ValueChanged" Thumb.DragStarted="sliderTrack_DragStarted" Thumb.DragCompleted="sliderTrack_DragCompleted" />
+                                    </Viewbox>
+
+                                    <Viewbox Grid.Column="5"   Grid.Row="14" Grid.RowSpan="2" >
+                                        <Slider Name="SliderVolume" Minimum="0" Maximum="100" Value="50" Background="AliceBlue" Foreground="AliceBlue" Width="200" Style="{DynamicResource TrackSlider}" ValueChanged="SliderVolume_ValueChanged" />
+                                    </Viewbox>
+
+                                    <Viewbox Grid.Column="2"  Grid.RowSpan="2" Grid.ColumnSpan="4"   >
+                                        <Label x:Name="TabMusicArtist"   Foreground="White" FontFamily="Source Sans Pro Black"  />
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="1" Grid.RowSpan="2"  Grid.Column="2" Grid.ColumnSpan="4"  >
+                                        <Label x:Name="TabMusicSong"    FontFamily="Source Sans Pro Semibold" >
+                                            <Label.Foreground>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="White" Offset="0"/>
+                                                    <GradientStop Color="#FF62FFEA" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Label.Foreground>
+                                        </Label>
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="14" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Right" Grid.RowSpan="2" >
+                                        <Button x:Name="TabMusicNext" Content="⏭" FontSize="25"  Height="34" VerticalAlignment="Bottom" Style="{DynamicResource MainButtonStyle}" HorizontalAlignment="Right" Width="40" Click="TabMusicNext_Click" />
+                                    </Viewbox>
+                                    <Viewbox  Grid.Row="14" Grid.Column="3" HorizontalAlignment="Left" Grid.RowSpan="2" >
+                                        <Button x:Name="TabMusicPrev" Content="⏮" FontSize="25" Height="34"  VerticalAlignment="Bottom" Style="{DynamicResource MainButtonStyle}" Click="TabMusicPrev_Click" HorizontalAlignment="Right" Width="40" />
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="14" Grid.Column="3" Grid.RowSpan="2"  Grid.ColumnSpan="2" HorizontalAlignment="Center"  >
+                                        <Button x:Name="TabMusicPlay" Content="▶" FontSize="25" Height="37"  VerticalAlignment="Bottom" Style="{DynamicResource MainButtonStyle}" HorizontalAlignment="Right" Width="75" Click="TabMusicPlay_Click" />
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="14" Grid.Column="3" Grid.RowSpan="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" >
+                                        <Button x:Name="TabMusicPause" Content="◼" FontSize="25" Height="37" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Visibility="Visible" Style="{DynamicResource MainButtonStyle}"  Width="75" Click="TabMusicPause_Click" />
+                                    </Viewbox>
+                                    <Viewbox  Grid.Row="11" Grid.Column="5"  Grid.ColumnSpan="1" Grid.RowSpan="2" HorizontalAlignment="Center">
+                                        <Label x:Name="TabAllTime"  Foreground="White" FontSize="13" />
+                                    </Viewbox>
+                                    <Viewbox  Grid.Row="11" Grid.Column="2" Grid.ColumnSpan="1" Grid.RowSpan="2" HorizontalAlignment="Center" >
+                                        <Label x:Name="TabTimeNow"  Foreground="White" FontSize="13" />
+                                    </Viewbox>
+
+                                </Grid>
+                                <Grid x:Name="ChangeToPlayerMessageGrid" Visibility="Hidden" >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+
+                                    </Grid.RowDefinitions>
+
+                                    <Viewbox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Bottom">
+                                        <Label Content="'Музыка' находиться в другом режиме . &#xD;&#xA;Чтобы перейти к режиму 'Плеер' нажмите на кнопку." Foreground="White" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" ></Label>
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="1" Grid.Column="1">
+                                        <Button x:Name="ChangeToPlayer" Content="Перейти к плееру" FontSize="20" Style="{DynamicResource MainButtonStyle}"  Click="ChangeToPlayer_Click"></Button>
+                                    </Viewbox>
+
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="Радио" Style="{DynamicResource TabButtons}">
+                            <Grid>
+                                <Grid x:Name="RadioGrid" Visibility="Visible" >
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Viewbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="11" HorizontalAlignment="Center" >
+                                        <ListView x:Name="StationsGroup" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"   SelectionChanged="StationsGroup_SelectionChanged"  >
+                                            <ListViewItem Content="Record Online Player"/>
+                                            <ListViewItem Content="Moscow Radio Stations"/>
+                                            <ListViewItem Content="BBC Radio Stations"/>
+                                        </ListView>
+                                    </Viewbox>
+                                    
+                                    <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" BorderThickness="1"  CornerRadius="65"  HorizontalAlignment="Center" Style="{DynamicResource BorderStyle}"></Border>
+                                    
+                                    <Viewbox Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="1" Grid.RowSpan="11" >
+                                        <ListView x:Name="RadioStationsList" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" MouseDoubleClick="RadioStationsList_MouseDoubleClick" />
+                                    </Viewbox>
+
+                                    <Border Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10"  BorderThickness="1"  CornerRadius="65"  HorizontalAlignment="Center" Style="{DynamicResource BorderStyle}"></Border>
+                                    
+                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                                        <Label x:Name="RadioStationName" FontSize="25"  Foreground="White" Height="45"  />
+                                    </Viewbox>
+                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Center" >
+                                        <Label x:Name="ChannelInfo" FontSize="14" Foreground="White"  />
+                                    </Viewbox>
+                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Center" >
+                                        <Button x:Name="Like" Content="❤" Style="{DynamicResource MainButtonStyle}" Click="Like_Click" >
+                                            <Button.ToolTip>
+                                                <ToolTip>
+                                                    Добавить трек в избранное
+                                                </ToolTip>
+                                            </Button.ToolTip>
+                                        </Button>
+                                    </Viewbox>
+                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Center" >
+                                        <Label x:Name="TrackArtist"  Foreground="White" FontSize="15" FontWeight="Bold"    />
+                                    </Viewbox>
+                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="5" HorizontalAlignment="Center" >
+                                        <Label x:Name="TrackName"  Foreground="White" FontSize="14"   />
+                                    </Viewbox>
+                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="2"  HorizontalAlignment="Center" >
+                                        <Button x:Name="PlayRadio" Content="▶" FontSize="50" Style="{DynamicResource MainButtonStyle}"  Click="PlayRadio_Click" Visibility="Hidden" ></Button>
+                                    </Viewbox>
+                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="2" HorizontalAlignment="Center" >
+                                        <Button x:Name="StopRadio" Content="◼" FontSize="50" Style="{DynamicResource MainButtonStyle}"  Visibility="Hidden" Click="StopRadio_Click" ></Button>
+                                    </Viewbox>
+
+                                    <Viewbox Grid.Column="4"  Grid.ColumnSpan="2"  Grid.Row="9" Grid.RowSpan="2" >
+                                        <Slider Name="SliderVolumeRadio" Minimum="0" Maximum="100"  Value="50"  Background="AliceBlue" Foreground="AliceBlue" Width="200" Style="{DynamicResource TrackSlider}" ValueChanged="SliderVolumeRadio_ValueChanged" />
+                                    </Viewbox>
+                                </Grid>
+                                <Grid x:Name="ChangeToRadioMessageGrid" Visibility="Hidden">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Viewbox  VerticalAlignment="Bottom" HorizontalAlignment="Stretch" Grid.ColumnSpan="3" >
+                                        <Label Content="'Музыка' находиться в другом режиме. &#xD;&#xA;Чтобы перейти к режиму 'Радио' нажмите на кнопку." Foreground="White" FontSize="20" ></Label>
+                                    </Viewbox>
+                                    <Viewbox Grid.Row="1" Grid.Column="1" >
+                                        <Button x:Name="ChangeToRadioButton" Content="Перейти к радио"  Style="{DynamicResource MainButtonStyle}" Click="ChangeToRadioButton_Click"></Button>
+                                    </Viewbox>
+
+                                </Grid>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Header="VKmusic" Style="{DynamicResource TabButtons}">
+                        </TabItem>
+                        <TabItem Header="Поиск" Style="{DynamicResource TabButtons}">
+                        </TabItem>
+
+                    </TabControl>
+                </TabItem>
+                <TabItem Header="                                                                                        "  Style="{DynamicResource TabButtons}" HorizontalAlignment="Right" IsEnabled="False">
+                    <Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem  Header="О программе" Style="{DynamicResource TabButtons}" HorizontalAlignment="Right" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </TabItem>
+                <TabItem  Header="Обновления" Style="{DynamicResource TabButtons}" HorizontalAlignment="Right" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1">
+                            <Label Content="Обновление программы"  FontWeight="Bold" Style="{DynamicResource LabelStyle}" ></Label>
+                        </Viewbox>
+                        <Viewbox Grid.Row="3" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+                            <Label x:Name="CurrectVersion" Style="{DynamicResource LabelStyle}"   />
+                        </Viewbox>
+                        <Viewbox  Grid.Row="4" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+                            <Label x:Name="LastCheckUpdate" Style="{DynamicResource LabelStyle}" />
+                        </Viewbox>
+                        <Viewbox  Grid.Row="5" Grid.ColumnSpan="3" HorizontalAlignment="Left">
+                            <Label x:Name="VersionMessage" Style="{DynamicResource LabelStyle}"/>
+                        </Viewbox>
+                        <Viewbox  Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" >
+                            <Button x:Name="CheckUpdateButton" Content="Проверить наличие обновлений"  Style="{DynamicResource MainButtonStyle}" Click="CheckUpdateButton_Click" />
+                        </Viewbox>
+                        <Viewbox  Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" >
+                            <Button x:Name="DownloadNowButton" Content="Обновить программу сейчас" Style="{DynamicResource MainButtonStyle}" Visibility="Hidden" Click="DownloadNowButton_Click" />
+                        </Viewbox>
+                        <TextBox x:Name="changelog" Grid.Column="3"  Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="14" Background="{x:Null}" Foreground="White" BorderBrush="Black" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Text="2.1.0.8a&#xD;&#xA;-Добавлено всплывающее окно&#xD;&#xA;-Добавлен список любимых треков(в разделе радио&#xD;&#xA;нажмите на ❤ чтобы добавить трек или&#xD;&#xA;пропишите лайк/like)&#xD;&#xA;-Добавлена перемотка треков в плеере&#xD;&#xA;-Добавлена громкость для радио&#xD;&#xA;-Временно не работает связь с Telegram &#xD;&#xA;&#xD;&#xA;2.1.0.5a&#xD;&#xA;-Полностью переписан интерфейс приложения&#xA;-FullSize Mode должен корректно работать на мониторах &#xA;16:9. На мониторах 4:3 растягивание работает&#xA; некорректно&#xA;-Изменено меню настроек (работает не корректоно в FullSize Mode)&#xA;-Добавлено радио&#xA;-Добавлен звук входящего сообщения и &#xA;оповещания&#xA;&#xA;&#xA;2.1.0.0a&#xA;-Зашифрованное соединение с сервером &#xA;-Обновление библиотек &#xA;-Оптимизация кода автообновления &#xA;-Оптимизация работы с памятью&#xA;&#xA;2.0.5.9a&#xA;-Реализовано автообновление программы&#xA;&#xA;2.0.4.9a&#xA;-Реализован запуск программы без интернета&#xA;-Добавлена иконка приложения&#xA;-Изменено главное меню&#xA;-Добавлен список команд&#xA;-Незначительные фиксы&#xA;&#xA;2.0.3.9a&#xA;-Создана база данных для регистрации пользователей&#xA;-Добавлена форма входа/регистрации AnasastasiaAccount&#xA;-AnastasiaAssistant локально собирает данные о любимом&#xA; жанре&#xA;-Добавлена форма обновления приложение(обновления&#xA; не работают)&#xA;&#xA;2.0.1.9a&#xA;-Добавлено несколько комманд&#xA;-Исправлены проблемы с Telegram&#xA;&#xA;2.0.0.0a&#xA;-Добавлено управление с помошью Telegram&#xA;-Полностью изменен дизайн&#xA;-Исправлены проблемы с плеером&#xA;-Изменен алгорит поиска команды&#xA;-Добавлены команды" TextChanged="changelog_TextChanged" />
+                        <Viewbox Grid.Column="4" Grid.Row="1">
+                            <Label Content="Change Log"  FontWeight="Bold"  Style="{DynamicResource LabelStyle}"  ></Label>
+                        </Viewbox>
+
+                        <Label x:Name="DownloadMessages" Grid.ColumnSpan="3" Grid.Row="10"   Visibility="Hidden" Style="{DynamicResource LabelStyle}" />
+                        <ProgressBar x:Name="downloadPB" Grid.ColumnSpan="3" Grid.Row="11" Background="{x:Null}" Foreground="Aqua" Minimum="0" Maximum="100"  Visibility="Hidden" />
+                        <ListView x:Name="Downloadlog" Visibility="Hidden" Background="{x:Null}" Foreground="White" BorderThickness="0" Grid.Row="12" Grid.RowSpan="4" Grid.ColumnSpan="3"/>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Viewbox Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,25,0,3" Grid.RowSpan="2">
+                <Button x:Name="SettingsMenuShow" Content="Настройки" Click="SettingsMenuShow_Click" Style="{DynamicResource MainButtonStyle}" Height="27"  />
+            </Viewbox>
+
+        </Grid>
+        <Grid  x:Name="SettMenuRight" Margin="0,0,-700,-0.4" HorizontalAlignment="Right" Width="700"  >
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border  Opacity="0.9" Grid.Column="0" Grid.Row="2" Grid.RowSpan="14" Grid.ColumnSpan="6" >
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF350D6E"/>
+                        <GradientStop Color="#FF420166" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Viewbox Grid.Column="0" Grid.Row="2">
+                <Button Content="￫" x:Name="SettingsMenuHide" Style="{DynamicResource MainButtonStyle}"  Click="SettingsMenuHide_Click" Width="80"></Button>
+            </Viewbox>
+            <TabControl TabStripPlacement="Left"  Background="{x:Null}" BorderBrush="{x:Null}"  Grid.Row="4" Grid.RowSpan="11" Grid.ColumnSpan="6">
+                <TabItem Header="Общие" Style="{DynamicResource TabButtons}" >
+                </TabItem>
+                <TabItem Header="Музыка" Style="{DynamicResource TabButtons}" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Viewbox Grid.Column="0" Grid.Row="0">
+                            <Label Content="Папка с музыкой" Height="28" Style="{DynamicResource LabelStyle}"  Background="{x:Null}"  HorizontalAlignment="Left" />
+                        </Viewbox>
+
+                        <Viewbox Grid.Row="1" Grid.ColumnSpan="4">
+                            <TextBox x:Name="MusicFolder"  Style="{DynamicResource TextBoxStyle}" Width="274" />
+                        </Viewbox>
+
+                        <Viewbox Grid.Column="4" Grid.Row="1">
+                            <Button x:Name="ChooseFolderBut" Content="Выбрать" Style="{DynamicResource MainButtonStyle}" FontSize="16" Click="ChooseFolderBut_Click"></Button>
+                        </Viewbox>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Персонализация" Style="{DynamicResource TabButtons}" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Звуки и голос" Style="{DynamicResource TabButtons}" >
+                </TabItem>
+                <TabItem Header="Соц сети" Style="{DynamicResource TabButtons}" >
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="0.1*"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border Style="{DynamicResource SocialBorderStyle}"  Grid.Column="0" Grid.Row="0"></Border>
+                        <Button x:Name="TeleAuth"  Content="Telegram" Style="{DynamicResource MainButtonStyle}" Grid.Column="0" Grid.Row="0"  Click="TeleAuth_Click" HorizontalAlignment="Right" />
+                        <Button x:Name="TeleDeAuth" Content="Telegram"  Style="{DynamicResource MainButtonStyle}" Click="TeleDeAuth_Click" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Visibility="Hidden" />
+                        <Image x:Name="TelegramPicture" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" ></Image>
+
+                        <Border Style="{DynamicResource SocialBorderStyle}"  Grid.Column="2" ></Border>
+                        <Button x:Name="AnastasiaAuth" Content="Anastasia"  Click="AnastasiaAuth_Click" Style="{DynamicResource MainButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" />
+                        <Button x:Name="AnastasiaUserInfo" Content="Anastasia" Style="{DynamicResource MainButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" Visibility="Hidden" Click="AnastasiaUserInfo_Click" />
+                        <Image x:Name="AnastasiaPicture"  Grid.Column="2" HorizontalAlignment="Left"></Image>
+
+                        <Border Style="{DynamicResource SocialBorderStyle}"  Grid.Column="4" ></Border>
+                        <Button x:Name="TwitterAuth" Content="Twitter"   Style="{DynamicResource MainButtonStyle}" Grid.Column="4" HorizontalAlignment="Right" />
+                        <Button x:Name="TwitterDeAuth" Content="Twitter" Style="{DynamicResource MainButtonStyle}" Grid.Column="4" HorizontalAlignment="Right" Visibility="Hidden" />
+                        <Image x:Name="Twittericture"  Grid.Column="4" HorizontalAlignment="Left"></Image>
+
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Viewbox Grid.Column="5" Grid.Row="15">
+                <Button x:Name="SaveButt" Content="Сохранить"  Style="{DynamicResource MainButtonStyle}" Click="SaveButt_Click"   ></Button>
+            </Viewbox>
+
+            <Grid x:Name="TelegramAuthGrid" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="6" Grid.RowSpan="7" Style="{DynamicResource SocialLoginStyle}"/>
+                <Viewbox Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="2">
+                    <Label Content="Your Phone" Style="{DynamicResource LabelStyle}"></Label>
+                </Viewbox>
+                <Viewbox Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="2" >
+                    <xctk:WatermarkTextBox x:Name="TelegramPhone" Style="{DynamicResource WaterMarkStyle}" Watermark="79160000000" Width="217"  ></xctk:WatermarkTextBox>
+                </Viewbox>
+
+                <Viewbox Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="3">
+                    <Label Style="{DynamicResource LabelStyle}" x:Name="ErrorMessage"></Label>
+                </Viewbox>
+
+                <Viewbox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="4">
+                    <Button x:Name="TeleNextButton" Content="Next" Style="{DynamicResource MainButtonStyle}" Click="TeleNextButton_Click" ></Button>
+                </Viewbox>
+                <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="6">
+                    <Button x:Name="CancleTeleAuth" Content="Cancle" Style="{DynamicResource MainButtonStyle}" Click="CancleTeleAuth_Click"></Button>
+                </Viewbox>
+            </Grid>
+            <Grid x:Name="TelegramCodeGrid"  Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" Visibility="Hidden" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="6" Grid.RowSpan="7" Style="{DynamicResource SocialLoginStyle}"/>
+                <Viewbox Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0" Grid.RowSpan="2">
+                    <Label x:Name="UserPhoneNumber"  Style="{DynamicResource LabelStyle}"></Label>
+                </Viewbox>
+                <Viewbox Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2">
+                    <xctk:WatermarkTextBox x:Name="WaterMarkCode" Style="{DynamicResource WaterMarkStyle}" BorderThickness="0,0,0,1"  Watermark="Code" TextChanged="WaterMarkCode_TextChanged" ></xctk:WatermarkTextBox>
+                </Viewbox>
+                <Viewbox  Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="3" >
+                    <Label x:Name="CodeError"  Style="{DynamicResource LabelStyle}" ></Label>
+                </Viewbox>
+                <Viewbox  Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="4" >
+                    <Label Style="{DynamicResource LabelStyle}" Content="We have send you an SMS with the code"></Label>
+                </Viewbox>
+
+            </Grid>
+            <Grid x:Name="TelegraAuthMessage" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" Visibility="Hidden">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="6" Grid.RowSpan="7" Style="{DynamicResource SocialLoginStyle}"/>
+                <Viewbox Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
+                    <Label Style="{DynamicResource LabelStyle}" x:Name="TeleAuthMessageLabel"></Label>
+                </Viewbox>
+            </Grid>
+
+            <Grid  x:Name="AnastasiaRegistration"  Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border  Style="{DynamicResource SocialLoginStyle}" Grid.ColumnSpan="8" Grid.RowSpan="13" />
+
+                <Viewbox Grid.Column="2" Grid.ColumnSpan="2">
+                    <Label Content="Регистрация" Style="{DynamicResource LabelStyle}" ></Label>
+                </Viewbox>
+
+                <TextBox  x:Name="NewLogin"  Style="{DynamicResource TextBoxStyle}" Grid.ColumnSpan="3" Grid.Row="2"/>
+                <TextBox  x:Name="NewName"  Style="{DynamicResource TextBoxStyle}" Grid.ColumnSpan="3" Grid.Row="4"/>
+                <TextBox  x:Name="NewSurName" Style="{DynamicResource TextBoxStyle}" Grid.ColumnSpan="3" Grid.Row="6" />
+                <PasswordBox  x:Name="NewPass"   Grid.ColumnSpan="3" Grid.Row="8"/>
+                <PasswordBox  x:Name="NewPassConfirm"   Grid.ColumnSpan="3" Grid.Row="10"/>
+                <TextBox  x:Name="NewEmail" Style="{DynamicResource TextBoxStyle}" Grid.Column="4" Grid.Row="2" Grid.ColumnSpan="3"/>
+                <TextBox  x:Name="newCity" Style="{DynamicResource TextBoxStyle}" Grid.Column="4" Grid.Row="4" Grid.ColumnSpan="3"/>
+                <Label Content="Логин" Style="{DynamicResource LabelStyle}" Grid.ColumnSpan="3" Grid.Row="1"/>
+                <Label Content="Имя" Style="{DynamicResource LabelStyle}" Grid.ColumnSpan="3" Grid.Row="3"/>
+                <Label Content="Фамилия" Style="{DynamicResource LabelStyle}" Grid.ColumnSpan="3" Grid.Row="5"/>
+                <Label Content="Пароль"  Style="{DynamicResource LabelStyle}" Grid.ColumnSpan="3" Grid.Row="7"/>
+                <Label Content="Повторите пароль" Style="{DynamicResource LabelStyle}" Grid.ColumnSpan="3" Grid.Row="9"/>
+                <Label Content="Е-mail" Style="{DynamicResource LabelStyle}" Grid.Column="4" Grid.Row="1"/>
+                <Label Content="Пол" Style="{DynamicResource LabelStyle}" Grid.Column="4" Grid.Row="5"/>
+
+                <ComboBox x:Name="Sex"  Grid.Column="4" Grid.Row="6" Grid.ColumnSpan="1" Foreground="White" Background="{x:Null}" >
+                    <ComboBoxItem>Ж</ComboBoxItem>
+                    <ComboBoxItem>М</ComboBoxItem>
+                </ComboBox>
+                <Label Content="Город" Style="{DynamicResource LabelStyle}" Grid.Column="4" Grid.Row="3"/>
+
+                <Button x:Name="CancleReg" Content="Отмена" Style="{DynamicResource MainButtonStyle}" Grid.Column="6" Grid.ColumnSpan="2" Grid.Row="12" Click="CancleReg_Click"></Button>
+                <Button x:Name="Registration" Content="Зарегистрироваться"  Style="{DynamicResource MainButtonStyle}"  Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="12" Click="Registration_Click"></Button>
+                <TextBox  x:Name="NewAvatar"   Style="{DynamicResource TextBoxStyle}" Grid.Column="4" Grid.Row="9" Grid.ColumnSpan="3"/>
+                <Button  Content="Выбрать" x:Name="ChooseAvatar"  Style="{DynamicResource MainButtonStyle}" Grid.Column="7" Grid.Row="9" Click="ChooseAvatar_Click"></Button>
+                <Label Content="Аватар"  Style="{DynamicResource LabelStyle}" Grid.Column="4" Grid.Row="8"/>
+                <Label x:Name="RegistrationError" Style="{DynamicResource LabelStyle}" Foreground="Red" Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="11"></Label>
+            </Grid>
+            <Grid x:Name="SuccReg" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border  Style="{DynamicResource SocialLoginStyle}" Grid.ColumnSpan="4" Grid.RowSpan="8" />
+                <Viewbox Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="3"  >
+                    <Label Content="Регистрация успешно завершена. &#xD;&#xA;                                         Спасибо!" Style="{DynamicResource LabelStyle}" IsEnabled="False" />
+                </Viewbox>
+                <Button x:Name="FinishReg" Content="Завершить"  Style="{DynamicResource MainButtonStyle}"  Background="{x:Null}" Grid.Column="3" Grid.Row="7" Click="FinishReg_Click"></Button>
+            </Grid>
+            <Grid x:Name="SuccLogIn" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2"  >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border  Style="{DynamicResource SocialLoginStyle}" Grid.ColumnSpan="4" Grid.RowSpan="8" />
+                <Viewbox Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="2" Grid.RowSpan="3"  >
+                    <Label  Content="Вы успешно вошли в систему. &#xD;&#xA;                                         Спасибо!" Style="{DynamicResource LabelStyle}" IsEnabled="False"/>
+                </Viewbox>
+
+                <Button x:Name="FinishLogIn" Content="Завершить"  Style="{DynamicResource MainButtonStyle}"  Grid.Column="3" Grid.Row="7" Click="FinishLogIn_Click"></Button>
+            </Grid>
+            <Grid Name="userinfodb" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Border Style="{DynamicResource SocialLoginStyle}" Grid.ColumnSpan="9" Grid.RowSpan="13"/>
+                <Viewbox Grid.Column="3" Grid.ColumnSpan="3" Grid.Row="2" Grid.RowSpan="2">
+                    <TextBox Name="Uname"  Background="{x:Null}" BorderThickness="0"  Foreground="White"  />
+                </Viewbox>
+
+
+                <Label Content="Город" Style="{DynamicResource LabelStyle}" Grid.Column="3"  Grid.Row="4"/>
+                <Label x:Name="ucity" Style="{DynamicResource LabelStyle}" Grid.Column="5"  Grid.Row="4" Grid.ColumnSpan="3"/>
+
+                <Label Content="Пол"  Style="{DynamicResource LabelStyle}" Grid.Column="3"  Grid.Row="5"/>
+                <Label x:Name="ugender" Style="{DynamicResource LabelStyle}" Grid.Column="5"  Grid.Row="5" Grid.ColumnSpan="3"/>
+
+                <Label Content="Почта" Style="{DynamicResource LabelStyle}" Grid.Column="3"  Grid.Row="6"/>
+                <Label Name="umail"    Style="{DynamicResource LabelStyle}" Grid.Column="5"  Grid.Row="6" Grid.ColumnSpan="3" />
+
+                <Label Content="Дата регистрации" Style="{DynamicResource LabelStyle}" Grid.Column="3"  Grid.Row="7" Grid.ColumnSpan="2" />
+                <Label Name="Uregdate" Style="{DynamicResource LabelStyle}"  Grid.Column="5"  Grid.Row="7" Grid.ColumnSpan="3" />
+
+                <Label Content="Любимый жанр" Style="{DynamicResource LabelStyle}" Grid.Column="3" Grid.ColumnSpan="2"  Grid.Row="8"/>
+                <Label Name="ufavganre"   Style="{DynamicResource LabelStyle}"  Grid.Column="5"  Grid.Row="8" Grid.ColumnSpan="3" />
+
+                <Label Foreground="White" Content="Позиция" Style="{DynamicResource LabelStyle}"  Grid.Column="3"  Grid.Row="9" />
+                <Label Name="Uposition" Style="{DynamicResource LabelStyle}"  Grid.Column="5"  Grid.Row="9" Grid.ColumnSpan="3"/>
+
+                <Image x:Name="UserAvatar"  Grid.Row="3" Grid.RowSpan="4" Grid.ColumnSpan="2" Stretch="Uniform" />
+                <my:CircularProgressBar x:Name="AvatarLoadBar" Background="Aquamarine" Foreground="#FF00E2C3" BorderBrush="Cyan" Value="0" Maximum="100" Minimum="0"   Grid.Row="3" Grid.RowSpan="4" Grid.ColumnSpan="2" Style="{DynamicResource circularProgressBar}" ></my:CircularProgressBar>
+                <Button x:Name="UserInfoExit"  Grid.ColumnSpan="2" Grid.Column="7"  Grid.Row="11"  Content="Закрыть" Style="{DynamicResource MainButtonStyle}" Click="UserInfoExit_Click"></Button>
+                <Button x:Name="ComAddRequest" Grid.Row="11" Grid.ColumnSpan="2" Grid.Column="3" Content="Добавить команду" Style="{DynamicResource MainButtonStyle}"  ></Button>
+                <Button x:Name="BugReport"  Grid.Row="11" Grid.ColumnSpan="2" Content="Сообщить о баге" Style="{DynamicResource MainButtonStyle}" ></Button>
+
+            </Grid>
+            <Grid  x:Name="AnastasiaLogIn" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+
+
+                </Grid.ColumnDefinitions>
+                <Border Style="{DynamicResource SocialLoginStyle}"  Grid.ColumnSpan="6" Grid.RowSpan="11" />
+                <Viewbox Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="4">
+                    <TextBox x:Name="AnastName"  Style="{DynamicResource TextBoxStyle}" Width="229"  />
+                </Viewbox>
+
+                <PasswordBox x:Name="AnastPass"  Background="{x:Null}" FontSize="20" Foreground="White" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="6">
+                    <PasswordBox.BorderBrush>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF00E2C3" Offset="0"/>
+                            <GradientStop Color="#FF5100C7" Offset="1"/>
+                        </LinearGradientBrush>
+                    </PasswordBox.BorderBrush>
+                </PasswordBox>
+
+                <Viewbox Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="10" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Label x:Name="Errors"  Foreground="Red" ></Label>
+                </Viewbox>
+                <Viewbox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="7">
+                    <Button x:Name="A_LogInButton" Content="Войти"  Style="{DynamicResource MainButtonStyle}" FontSize="20" Click="A_LogInButton_Click" ></Button>
+                </Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left">
+                    <Label Content="Password" Style="{DynamicResource LabelStyle}" />
+                </Viewbox>
+                <Viewbox Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left">
+                    <Label Content="Login"  Style="{DynamicResource LabelStyle}" ></Label>
+                </Viewbox>
+                <Viewbox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="9">
+                    <Button x:Name="A_RegisterBut" Content="Зарегистрироваться" Style="{DynamicResource MainButtonStyle}" Click="A_RegisterBut_Click" ></Button>
+                </Viewbox>
+                <Viewbox  Grid.Column="5" Grid.Row="10" >
+                    <Button x:Name="CancleLogIn" Content="Назад" Style="{DynamicResource MainButtonStyle}"  Click="CancleLogIn_Click"></Button>
+                </Viewbox>
+
+                <ProgressBar x:Name="LogInBar"  Visibility="Hidden" IsIndeterminate="True" Foreground="Indigo" BorderBrush="{x:Null}" Background="{x:Null}"></ProgressBar>
+            </Grid>
+
+        </Grid>
+        <Grid x:Name="PopUpMenu" Margin="0,-50,0,0" VerticalAlignment="Top" Width="450" Height="50">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border  Opacity="0.9" Grid.Column="0" Grid.Row="0" Grid.RowSpan="5" Grid.ColumnSpan="6" >
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF350D6E"/>
+                        <GradientStop Color="#FF420166" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Viewbox Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="3">
+                <Label x:Name="PopUpLabel1" Style="{DynamicResource LabelStyle}" ></Label>
+            </Viewbox>
+            <Viewbox Grid.Column="1" Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="3">
+                <Label x:Name="PopUpLabel2" Style="{DynamicResource LabelStyle}" ></Label>
+            </Viewbox>
+
+        </Grid>
+
+        <Grid  x:Name="FavouriteTrackList" Margin="0,0,0,-0.4" HorizontalAlignment="Right" Width="700" Visibility="Hidden" >
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Border  Opacity="0.9" Grid.Column="0" Grid.Row="2" Grid.RowSpan="14" Grid.ColumnSpan="6" >
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF350D6E"/>
+                        <GradientStop Color="#FF420166" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Viewbox Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="4" >
+                <Label Content="Понравившиеся треки" Style="{DynamicResource LabelStyle}" ></Label>
+            </Viewbox>
+        
+            <Button x:Name="CloseFTList" Grid.Row="2" Style="{DynamicResource MainButtonStyle}" Content="X" Click="CloseFTList_Click"></Button>
+            <Button x:Name="ClearFTList" Grid.Row="14" Grid.Column="5" Style="{DynamicResource MainButtonStyle}" Content="Очистить список" Click="ClearFTList_Click"></Button>
+            <ListView x:Name="FTListView" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="4" Grid.RowSpan="10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"></ListView>
+        </Grid>
+    </Grid>
+
+
+</Window>

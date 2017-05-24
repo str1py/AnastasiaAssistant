@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<item>
+  <bass.dll>2.4.12</bass.dll>
+  <Bass.Net.dll>2.4.12.5</Bass.Net.dll>
+  <BigMath.dll>0.5.0.0</BigMath.dll>
+  <Ionic.ZLib.dll>2.0.0.14</Ionic.ZLib.dll>
+  <Microsoft.Speech.dll>11.0.7400.345</Microsoft.Speech.dll>
+  <MySql.Data.dll>6.9.9.0</MySql.Data.dll>
+  <Newtonsoft.Json.dll>9.0.1.19813</Newtonsoft.Json.dll>
+  <policy.2.0.taglib-sharp.dll>0.0.0.0</policy.2.0.taglib-sharp.dll>
+  <System.Net.Http.Formatting.dll>5.2.30128.0</System.Net.Http.Formatting.dll>
+  <taglib-sharp.dll>2.1.0.0</taglib-sharp.dll>
+  <Telegram.Bot.dll>10.4.0.0</Telegram.Bot.dll>
+  <TeleSharp.TL.dll>1.0.0.0</TeleSharp.TL.dll>
+  <TLSharp.Core.dll>1.0.0.0</TLSharp.Core.dll>
+  <xNet.dll>2.1.1.0</xNet.dll>
+  <Updater.exe>1.0.0.0</Updater.exe>
+</item>

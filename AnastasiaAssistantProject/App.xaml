@@ -1,0 +1,15 @@
+﻿<Application x:Class="AnastasiaAssistantProject.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:AnastasiaAssistantProject"
+             StartupUri="StartUpWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Themes/Theme.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/Themes/DataTemplates.xaml" />
+
+        </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
