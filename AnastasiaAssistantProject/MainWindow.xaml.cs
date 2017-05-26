@@ -350,21 +350,20 @@ namespace AnastasiaAssistantProject
                 case 0: fill.RecordStationsFill(); break;
                 case 1: fill.MoscowStationsFill(); break;
                 case 2: fill.BBCStationsFill(); break;
-                case 3: fill.LastFmStationsFill(); break;
             }
         }
         private void RadioStationsList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             PlayRadio.Visibility = Visibility.Hidden;
-            ps.Getindex(RadioStationsList.SelectedIndex);
-            bass.PlayFromURL(BassPlayer.Radio.StationToPlay.URL, 50);
+            ps.Getindex(RadioStationsList.SelectedIndex, StationsGroup.SelectedIndex);
+            bass.PlayFromURL(BassPlayer.Radio.StationToPlay.URL,Properties.Settings.Default.UserVolume);
             ps.GetStationInfo();
             SetStationInfo();
             StopRadio.Visibility = Visibility.Visible;
         }
         private void PlayRadio_Click(object sender, RoutedEventArgs e)
         {
-            bass.PlayFromURL(BassPlayer.Radio.StationToPlay.URL, 50);
+            bass.PlayFromURL(BassPlayer.Radio.StationToPlay.URL, Properties.Settings.Default.UserVolume);
             PlayRadio.Visibility = Visibility.Hidden;
             StopRadio.Visibility = Visibility.Visible;
         }
@@ -674,6 +673,7 @@ namespace AnastasiaAssistantProject
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             BassNetHelper.SetStreamVolume(BassNetHelper.Stream, (float)SliderVolume.Value);
+            Properties.Settings.Default.UserVolume = (float)SliderVolume.Value;
         }
 
 
@@ -682,6 +682,7 @@ namespace AnastasiaAssistantProject
         private void SliderVolumeRadio_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             BassNetHelper.SetStreamVolume(BassNetHelper.Stream, (float)SliderVolumeRadio.Value);
+            Properties.Settings.Default.UserVolume = (float)SliderVolumeRadio.Value;
         }
 
         #endregion

@@ -17,7 +17,6 @@ namespace AnastasiaAssistantProject.BassPlayer
         private static int HZ = 44100;
         private static bool InitDefaultDevice;
         public static int Stream;
-        public static float Volume = 100;
         protected static List<string> Files = new List<string>();
         private static int alltrackscount;
         protected static int CurrentTrackNumber = 0;
@@ -34,8 +33,8 @@ namespace AnastasiaAssistantProject.BassPlayer
         }
         public static void SetStreamVolume(int stream, float vol)
         {
-            Volume = vol;
-            Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, Volume / 100F);
+            Properties.Settings.Default.UserVolume = vol;
+            Bass.BASS_ChannelSetAttribute(stream, BASSAttribute.BASS_ATTRIB_VOL, Properties.Settings.Default.UserVolume / 100F);
         }
         protected static int GetTimeOfStream(int stream)
         {
@@ -67,8 +66,8 @@ namespace AnastasiaAssistantProject.BassPlayer
                         Stream = Bass.BASS_StreamCreateFile(track, 0, 0, BASSFlag.BASS_DEFAULT);
                         if (Stream != 0)
                         {
-                            Volume = vol;
-                            Bass.BASS_ChannelSetAttribute(Stream, BASSAttribute.BASS_ATTRIB_VOL, Volume / 100F);
+                            Properties.Settings.Default.UserVolume = vol;
+                            Bass.BASS_ChannelSetAttribute(Stream, BASSAttribute.BASS_ATTRIB_VOL, Properties.Settings.Default.UserVolume / 100F);
                             Bass.BASS_ChannelPlay(Stream, false);
                         }
                     }
@@ -90,7 +89,7 @@ namespace AnastasiaAssistantProject.BassPlayer
             {
                 if (alltrackscount > CurrentTrackNumber + 1)
                 {
-                    Play(Files[++CurrentTrackNumber], Volume);
+                    Play(Files[++CurrentTrackNumber], Properties.Settings.Default.UserVolume);
                     GetFullMusicInfo.GetTrackInfo();
                     MainWindow.Instance.SetSongInfo();
                     EndPlayList = false;
@@ -109,7 +108,7 @@ namespace AnastasiaAssistantProject.BassPlayer
             Stop();
             string current = Files[index];
             CurrentTrackNumber = index; 
-            Play(current, Volume);
+            Play(current, Properties.Settings.Default.UserVolume);
             GetFullMusicInfo.GetTrackInfo();
             MainWindow.Instance.SetSongInfo();
             MainWindow.Instance.PlayList.SelectedIndex = index;
@@ -132,7 +131,7 @@ namespace AnastasiaAssistantProject.BassPlayer
                 TimerStart();
                 playlistcl.PlayListFill();
                 string current = Files[CurrentTrackNumber];
-                Play(current, Volume);
+                Play(current, Properties.Settings.Default.UserVolume);
                 GetFullMusicInfo.GetTrackInfo();
 
             }
@@ -151,7 +150,7 @@ namespace AnastasiaAssistantProject.BassPlayer
                 TimerStart();
                 CurrentTrackNumber += 1;
                 string current = Files[CurrentTrackNumber];
-                Play(current, Volume);
+                Play(current, Properties.Settings.Default.UserVolume);
                 GetFullMusicInfo.GetTrackInfo();
                 MainWindow.Instance.PlayList.SelectedIndex = CurrentTrackNumber;
             }
@@ -160,7 +159,7 @@ namespace AnastasiaAssistantProject.BassPlayer
                 TimerStart();
                 CurrentTrackNumber = alltrackscount - 1;
                 string current = Files[alltrackscount - 1];
-                Play(current, Volume);
+                Play(current, Properties.Settings.Default.UserVolume);
                 GetFullMusicInfo.GetTrackInfo();
                 MainWindow.Instance.PlayList.SelectedIndex = CurrentTrackNumber;
             }
@@ -174,7 +173,7 @@ namespace AnastasiaAssistantProject.BassPlayer
                 TimerStart();
                 CurrentTrackNumber = 0;
                 string current = Files[CurrentTrackNumber];
-                Play(current, Volume);
+                Play(current, Properties.Settings.Default.UserVolume);
                 GetFullMusicInfo.GetTrackInfo();
                 MainWindow.Instance.PlayList.SelectedIndex = CurrentTrackNumber;   
             }
@@ -183,7 +182,7 @@ namespace AnastasiaAssistantProject.BassPlayer
                 TimerStart();
                 CurrentTrackNumber -= 1;
                 string current = Files[CurrentTrackNumber];
-                Play(current, Volume);
+                Play(current, Properties.Settings.Default.UserVolume);
                 GetFullMusicInfo.GetTrackInfo();
                 MainWindow.Instance.PlayList.SelectedIndex = CurrentTrackNumber;
             }
@@ -212,8 +211,8 @@ namespace AnastasiaAssistantProject.BassPlayer
                     Stream = Bass.BASS_StreamCreateURL(url, 0, BASSFlag.BASS_DEFAULT, null, IntPtr.Zero);
                     if (Stream != 0)
                     {
-                        Volume = vol;
-                        Bass.BASS_ChannelSetAttribute(Stream, BASSAttribute.BASS_ATTRIB_VOL, Volume / 100F);
+                        Properties.Settings.Default.UserVolume = vol;
+                        Bass.BASS_ChannelSetAttribute(Stream, BASSAttribute.BASS_ATTRIB_VOL, Properties.Settings.Default.UserVolume / 100F);
                         Bass.BASS_ChannelPlay(Stream, false);
                     }
                 }

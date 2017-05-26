@@ -24,11 +24,29 @@ namespace AnastasiaAssistantProject.BassPlayer.Radio
         }
         public void MoscowStationsFill()
         {
+            string path = System.IO.Directory.GetCurrentDirectory();
+            XDocument xDoc1 = XDocument.Load(path + @"/Data/MoscowRadioStations.xml");
 
+            int station = 6;
+            string st;
+            for (int i = 1; i <= station; i++)
+            {
+                st = xDoc1.Root.Element("MRS" + i).Element("title").Value;
+                MainWindow.Instance.AddStations(st);
+            }
         }
         public void BBCStationsFill()
         {
+            string path = System.IO.Directory.GetCurrentDirectory();
+            XDocument xDoc2 = XDocument.Load(path + @"/Data/BBCRadioStations.xml");
 
+            int station = 13;
+            string st;
+            for (int i = 1; i <= station; i++)
+            {
+                st = xDoc2.Root.Element("BBCRadio" + i).Element("title").Value;
+                MainWindow.Instance.AddStations(st);
+            }
         }
         public void LastFmStationsFill()
         {

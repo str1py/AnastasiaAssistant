@@ -20,14 +20,14 @@
         <Storyboard x:Key="sbSettingsMenuHide">
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,0,-700,0" AccelerationRatio=".9" Duration="0:0:1" />
         </Storyboard>
-     
+
         <Storyboard x:Key="sbPopUpMenuShow">
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,-50,0,0" To="0,0,0,0" DecelerationRatio=".9" Duration="0:0:1" />
         </Storyboard>
         <Storyboard x:Key="sbPopUpMenuHide">
             <ThicknessAnimation Storyboard.TargetProperty="Margin" From="0,0,0,0" To="0,-50,0,0" AccelerationRatio=".9" Duration="0:0:1" />
         </Storyboard>
-        
+
         <DataTemplate x:Key="SimpleAnswer">
             <Grid Width="339,2" Height="134" >
                 <TextBlock Text="{Binding Answer}" TextWrapping="Wrap" VerticalAlignment="Stretch" Margin="0,17.98,0,6.035" HorizontalAlignment="Left" Foreground="White" FontSize="14" ></TextBlock>
@@ -201,14 +201,14 @@
                                         <Border.Effect>
                                             <DropShadowEffect BlurRadius="10" ShadowDepth="5"  Color="Black"  />
                                         </Border.Effect>
-                                     
+
                                     </Border>
                                     <Border Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="12"  VerticalAlignment="Bottom"  BorderThickness="1" BorderBrush="Black">
                                         <Border.Effect>
                                             <DropShadowEffect BlurRadius="10" ShadowDepth="5"  Color="Black"  />
                                         </Border.Effect>
                                     </Border>
-                                    
+
                                     <Image x:Name="TabMusicSongPicture" Stretch="Fill" Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="3" Grid.RowSpan="10" >
                                     </Image>
 
@@ -286,19 +286,19 @@
                         </TabItem>
                         <TabItem Header="Радио" Style="{DynamicResource TabButtons}">
                             <Grid>
-                                <Grid x:Name="RadioGrid" Visibility="Visible" >
+                                <Grid x:Name="RadioGrid" Visibility="Visible" Margin="0,5,0,0" >
                                     <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
-                                        <RowDefinition />
+                                        <RowDefinition Height="35*" />
+                                        <RowDefinition Height="22*" />
+                                        <RowDefinition Height="22*" />
+                                        <RowDefinition Height="20*" />
+                                        <RowDefinition Height="30*" />
+                                        <RowDefinition Height="30*" />
+                                        <RowDefinition Height="30*" />
+                                        <RowDefinition Height="30*" />
+                                        <RowDefinition Height="30*" />
+                                        <RowDefinition Height="31*" />
+                                        <RowDefinition Height="30*" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition/>
@@ -308,29 +308,36 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition/>
                                     </Grid.ColumnDefinitions>
-                                    <Viewbox Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="11" HorizontalAlignment="Center" >
+                                    <Border  Opacity="0.9" Grid.Column="0" Grid.Row="0" Grid.RowSpan="4" Grid.ColumnSpan="7" >
+                                        <Border.Background>
+                                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                <GradientStop Color="DarkViolet"/>
+                                                <GradientStop Color="SteelBlue" Offset="1"/>
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                        <Border.Effect>
+                                            <DropShadowEffect BlurRadius="10" ShadowDepth="5"  Color="Black"  />
+                                        </Border.Effect>
+                                    </Border>
+                                    <Viewbox Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="2" Grid.RowSpan="7" HorizontalAlignment="Center"   >
                                         <ListView x:Name="StationsGroup" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"   SelectionChanged="StationsGroup_SelectionChanged"  >
                                             <ListViewItem Content="Record Online Player"/>
                                             <ListViewItem Content="Moscow Radio Stations"/>
                                             <ListViewItem Content="BBC Radio Stations"/>
                                         </ListView>
                                     </Viewbox>
-                                    
-                                    <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10" BorderThickness="1"  CornerRadius="65"  HorizontalAlignment="Center" Style="{DynamicResource BorderStyle}"></Border>
-                                    
-                                    <Viewbox Grid.Column="2" Grid.ColumnSpan="2"  Grid.Row="1" Grid.RowSpan="11" >
-                                        <ListView x:Name="RadioStationsList" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" MouseDoubleClick="RadioStationsList_MouseDoubleClick" />
-                                    </Viewbox>
 
-                                    <Border Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="10"  BorderThickness="1"  CornerRadius="65"  HorizontalAlignment="Center" Style="{DynamicResource BorderStyle}"></Border>
                                     
-                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center" >
-                                        <Label x:Name="RadioStationName" FontSize="25"  Foreground="White" Height="45"  />
+                                    <Border Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="4" Grid.RowSpan="8" BorderThickness="1"  CornerRadius="65"  HorizontalAlignment="Center" Style="{DynamicResource BorderStyle}"  ></Border>
+                                    <ListView x:Name="RadioStationsList" Background="{x:Null}" Foreground="White" BorderBrush="{x:Null}" Grid.Column="2" Grid.ColumnSpan="5"  Grid.Row="4" Grid.RowSpan="9" MouseDoubleClick="RadioStationsList_MouseDoubleClick"  />
+
+                                    <Viewbox Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center"   >
+                                        <Label x:Name="RadioStationName" FontSize="25"  Foreground="White" Height="45" Style="{DynamicResource LabelStyle}" />
                                     </Viewbox>
-                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="2" HorizontalAlignment="Center" >
+                                    <Viewbox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Center"   >
                                         <Label x:Name="ChannelInfo" FontSize="14" Foreground="White"  />
                                     </Viewbox>
-                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="3" HorizontalAlignment="Center" >
+                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.RowSpan="2" Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Top"  >
                                         <Button x:Name="Like" Content="❤" Style="{DynamicResource MainButtonStyle}" Click="Like_Click" >
                                             <Button.ToolTip>
                                                 <ToolTip>
@@ -339,20 +346,34 @@
                                             </Button.ToolTip>
                                         </Button>
                                     </Viewbox>
-                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="4" HorizontalAlignment="Center" >
-                                        <Label x:Name="TrackArtist"  Foreground="White" FontSize="15" FontWeight="Bold"    />
+                                    <Viewbox Grid.Column="2"  Grid.ColumnSpan="2" HorizontalAlignment="Center"  Grid.Row="0"   >
+                                        <Label x:Name="TrackArtist"  FontSize="15" FontWeight="Bold" Style="{DynamicResource LabelStyle}">
+                                            <Label.Foreground>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="White" Offset="0"/>
+                                                    <GradientStop Color="#FF62FFEA" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Label.Foreground>
+                                        </Label>
                                     </Viewbox>
-                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="5" HorizontalAlignment="Center" >
-                                        <Label x:Name="TrackName"  Foreground="White" FontSize="14"   />
+                                    <Viewbox Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center"   >
+                                        <Label x:Name="TrackName"  FontSize="14"  Style="{DynamicResource LabelStyle}"   >
+                                            <Label.Foreground>
+                                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                                    <GradientStop Color="#FF62FFEA" Offset="0"/>
+                                                    <GradientStop Color="White" Offset="1"/>
+                                                </LinearGradientBrush>
+                                            </Label.Foreground>
+                                        </Label>
                                     </Viewbox>
-                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="2"  HorizontalAlignment="Center" >
+                                    <Viewbox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2"  HorizontalAlignment="Center"   >
                                         <Button x:Name="PlayRadio" Content="▶" FontSize="50" Style="{DynamicResource MainButtonStyle}"  Click="PlayRadio_Click" Visibility="Hidden" ></Button>
                                     </Viewbox>
-                                    <Viewbox Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="7" Grid.RowSpan="2" HorizontalAlignment="Center" >
+                                    <Viewbox Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Center"   >
                                         <Button x:Name="StopRadio" Content="◼" FontSize="50" Style="{DynamicResource MainButtonStyle}"  Visibility="Hidden" Click="StopRadio_Click" ></Button>
                                     </Viewbox>
 
-                                    <Viewbox Grid.Column="4"  Grid.ColumnSpan="2"  Grid.Row="9" Grid.RowSpan="2" >
+                                    <Viewbox Grid.Column="4"  Grid.ColumnSpan="2" Grid.RowSpan="2"  >
                                         <Slider Name="SliderVolumeRadio" Minimum="0" Maximum="100"  Value="50"  Background="AliceBlue" Foreground="AliceBlue" Width="200" Style="{DynamicResource TrackSlider}" ValueChanged="SliderVolumeRadio_ValueChanged" />
                                     </Viewbox>
                                 </Grid>
@@ -378,10 +399,7 @@
                                 </Grid>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="VKmusic" Style="{DynamicResource TabButtons}">
-                        </TabItem>
-                        <TabItem Header="Поиск" Style="{DynamicResource TabButtons}">
-                        </TabItem>
+                  
 
                     </TabControl>
                 </TabItem>
@@ -465,7 +483,7 @@
                         <Viewbox  Grid.Row="7" Grid.ColumnSpan="3" Grid.RowSpan="3" >
                             <Button x:Name="DownloadNowButton" Content="Обновить программу сейчас" Style="{DynamicResource MainButtonStyle}" Visibility="Hidden" Click="DownloadNowButton_Click" />
                         </Viewbox>
-                        <TextBox x:Name="changelog" Grid.Column="3"  Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="14" Background="{x:Null}" Foreground="White" BorderBrush="Black" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Text="2.1.0.8a&#xD;&#xA;-Добавлено всплывающее окно&#xD;&#xA;-Добавлен список любимых треков(в разделе радио&#xD;&#xA;нажмите на ❤ чтобы добавить трек или&#xD;&#xA;пропишите лайк/like)&#xD;&#xA;-Добавлена перемотка треков в плеере&#xD;&#xA;-Добавлена громкость для радио&#xD;&#xA;-Временно не работает связь с Telegram &#xD;&#xA;&#xD;&#xA;2.1.0.5a&#xD;&#xA;-Полностью переписан интерфейс приложения&#xA;-FullSize Mode должен корректно работать на мониторах &#xA;16:9. На мониторах 4:3 растягивание работает&#xA; некорректно&#xA;-Изменено меню настроек (работает не корректоно в FullSize Mode)&#xA;-Добавлено радио&#xA;-Добавлен звук входящего сообщения и &#xA;оповещания&#xA;&#xA;&#xA;2.1.0.0a&#xA;-Зашифрованное соединение с сервером &#xA;-Обновление библиотек &#xA;-Оптимизация кода автообновления &#xA;-Оптимизация работы с памятью&#xA;&#xA;2.0.5.9a&#xA;-Реализовано автообновление программы&#xA;&#xA;2.0.4.9a&#xA;-Реализован запуск программы без интернета&#xA;-Добавлена иконка приложения&#xA;-Изменено главное меню&#xA;-Добавлен список команд&#xA;-Незначительные фиксы&#xA;&#xA;2.0.3.9a&#xA;-Создана база данных для регистрации пользователей&#xA;-Добавлена форма входа/регистрации AnasastasiaAccount&#xA;-AnastasiaAssistant локально собирает данные о любимом&#xA; жанре&#xA;-Добавлена форма обновления приложение(обновления&#xA; не работают)&#xA;&#xA;2.0.1.9a&#xA;-Добавлено несколько комманд&#xA;-Исправлены проблемы с Telegram&#xA;&#xA;2.0.0.0a&#xA;-Добавлено управление с помошью Telegram&#xA;-Полностью изменен дизайн&#xA;-Исправлены проблемы с плеером&#xA;-Изменен алгорит поиска команды&#xA;-Добавлены команды" TextChanged="changelog_TextChanged" />
+                        <TextBox x:Name="changelog" Grid.Column="3"  Grid.Row="2" Grid.ColumnSpan="3" Grid.RowSpan="14" Background="{x:Null}" Foreground="White" BorderBrush="Black" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Text="2.1.0.8a&#xA;-Добавлено всплывающее окно&#xA;-Добавлен список любимых треков(в разделе радио&#xA;нажмите на ❤ чтобы добавить трек или&#xA;пропишите лайк/like)&#xA;-Добавлена перемотка треков в плеере&#xA;-Добавлена громкость для радио&#xA;-Временно не работает связь с Telegram &#xD;&#xA;-Изменено радио&#xA;&#xA;2.1.0.5a&#xA;-Полностью переписан интерфейс приложения&#xA;-FullSize Mode должен корректно работать на мониторах &#xA;16:9. На мониторах 4:3 растягивание работает&#xA; некорректно&#xA;-Изменено меню настроек (работает не корректоно в FullSize Mode)&#xA;-Добавлено радио&#xA;-Добавлен звук входящего сообщения и &#xA;оповещания&#xA;&#xA;&#xA;2.1.0.0a&#xA;-Зашифрованное соединение с сервером &#xA;-Обновление библиотек &#xA;-Оптимизация кода автообновления &#xA;-Оптимизация работы с памятью&#xA;&#xA;2.0.5.9a&#xA;-Реализовано автообновление программы&#xA;&#xA;2.0.4.9a&#xA;-Реализован запуск программы без интернета&#xA;-Добавлена иконка приложения&#xA;-Изменено главное меню&#xA;-Добавлен список команд&#xA;-Незначительные фиксы&#xA;&#xA;2.0.3.9a&#xA;-Создана база данных для регистрации пользователей&#xA;-Добавлена форма входа/регистрации AnasastasiaAccount&#xA;-AnastasiaAssistant локально собирает данные о любимом&#xA; жанре&#xA;-Добавлена форма обновления приложение(обновления&#xA; не работают)&#xA;&#xA;2.0.1.9a&#xA;-Добавлено несколько комманд&#xA;-Исправлены проблемы с Telegram&#xA;&#xA;2.0.0.0a&#xA;-Добавлено управление с помошью Telegram&#xA;-Полностью изменен дизайн&#xA;-Исправлены проблемы с плеером&#xA;-Изменен алгорит поиска команды&#xA;-Добавлены команды" TextChanged="changelog_TextChanged" />
                         <Viewbox Grid.Column="4" Grid.Row="1">
                             <Label Content="Change Log"  FontWeight="Bold"  Style="{DynamicResource LabelStyle}"  ></Label>
                         </Viewbox>
@@ -501,14 +519,15 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="117*"/>
+                <ColumnDefinition Width="77*"/>
+                <ColumnDefinition Width="40*"/>
+                <ColumnDefinition Width="117*"/>
+                <ColumnDefinition Width="117*"/>
+                <ColumnDefinition Width="117*"/>
+                <ColumnDefinition Width="117*"/>
             </Grid.ColumnDefinitions>
-            <Border  Opacity="0.9" Grid.Column="0" Grid.Row="2" Grid.RowSpan="14" Grid.ColumnSpan="6" >
+            <Border  Opacity="0.9" Grid.Column="0" Grid.Row="2" Grid.RowSpan="14" Grid.ColumnSpan="7" Margin="0,0,0,-0.333" >
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                         <GradientStop Color="#FF350D6E"/>
@@ -516,10 +535,10 @@
                     </LinearGradientBrush>
                 </Border.Background>
             </Border>
-            <Viewbox Grid.Column="0" Grid.Row="2">
+            <Viewbox Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,76.482,0">
                 <Button Content="￫" x:Name="SettingsMenuHide" Style="{DynamicResource MainButtonStyle}"  Click="SettingsMenuHide_Click" Width="80"></Button>
             </Viewbox>
-            <TabControl TabStripPlacement="Left"  Background="{x:Null}" BorderBrush="{x:Null}"  Grid.Row="4" Grid.RowSpan="11" Grid.ColumnSpan="6">
+            <TabControl TabStripPlacement="Left"  Background="{x:Null}" BorderBrush="{x:Null}"  Grid.Row="4" Grid.RowSpan="11" Grid.ColumnSpan="7">
                 <TabItem Header="Общие" Style="{DynamicResource TabButtons}" >
                 </TabItem>
                 <TabItem Header="Музыка" Style="{DynamicResource TabButtons}" >
@@ -610,11 +629,11 @@
                     </Grid>
                 </TabItem>
             </TabControl>
-            <Viewbox Grid.Column="5" Grid.Row="15">
+            <Viewbox Grid.Column="5" Grid.Row="15" Grid.ColumnSpan="2" Margin="116.333,0,0,-0.333">
                 <Button x:Name="SaveButt" Content="Сохранить"  Style="{DynamicResource MainButtonStyle}" Click="SaveButt_Click"   ></Button>
             </Viewbox>
 
-            <Grid x:Name="TelegramAuthGrid" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" Visibility="Hidden">
+            <Grid x:Name="TelegramAuthGrid" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="14" Grid.Row="2" Visibility="Hidden" Margin="0,0,0,-0.333">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -651,7 +670,7 @@
                     <Button x:Name="CancleTeleAuth" Content="Cancle" Style="{DynamicResource MainButtonStyle}" Click="CancleTeleAuth_Click"></Button>
                 </Viewbox>
             </Grid>
-            <Grid x:Name="TelegramCodeGrid"  Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" Visibility="Hidden" >
+            <Grid x:Name="TelegramCodeGrid"  Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="14" Grid.Row="2" Visibility="Hidden" Margin="0,0,0,-0.333" >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -684,7 +703,7 @@
                 </Viewbox>
 
             </Grid>
-            <Grid x:Name="TelegraAuthMessage" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" Visibility="Hidden">
+            <Grid x:Name="TelegraAuthMessage" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="14" Grid.Row="2" Visibility="Hidden" Margin="0,0,0,-0.333">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -701,7 +720,7 @@
                 </Viewbox>
             </Grid>
 
-            <Grid  x:Name="AnastasiaRegistration"  Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" >
+            <Grid  x:Name="AnastasiaRegistration"  Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="14" Grid.Row="2" Margin="0,0,0,-0.333" >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -761,7 +780,7 @@
                 <Label Content="Аватар"  Style="{DynamicResource LabelStyle}" Grid.Column="4" Grid.Row="8"/>
                 <Label x:Name="RegistrationError" Style="{DynamicResource LabelStyle}" Foreground="Red" Grid.Column="4" Grid.ColumnSpan="4" Grid.Row="11"></Label>
             </Grid>
-            <Grid x:Name="SuccReg" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" >
+            <Grid x:Name="SuccReg" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="14" Grid.Row="2" Margin="0,0,0,-0.333" >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -786,7 +805,7 @@
                 </Viewbox>
                 <Button x:Name="FinishReg" Content="Завершить"  Style="{DynamicResource MainButtonStyle}"  Background="{x:Null}" Grid.Column="3" Grid.Row="7" Click="FinishReg_Click"></Button>
             </Grid>
-            <Grid x:Name="SuccLogIn" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2"  >
+            <Grid x:Name="SuccLogIn" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="14" Grid.Row="2" Margin="0,0,0,-0.333"  >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -810,7 +829,7 @@
 
                 <Button x:Name="FinishLogIn" Content="Завершить"  Style="{DynamicResource MainButtonStyle}"  Grid.Column="3" Grid.Row="7" Click="FinishLogIn_Click"></Button>
             </Grid>
-            <Grid Name="userinfodb" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" >
+            <Grid Name="userinfodb" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="14" Grid.Row="2" Margin="0,0,0,-0.333" >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -868,7 +887,7 @@
                 <Button x:Name="BugReport"  Grid.Row="11" Grid.ColumnSpan="2" Content="Сообщить о баге" Style="{DynamicResource MainButtonStyle}" ></Button>
 
             </Grid>
-            <Grid  x:Name="AnastasiaLogIn" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="14" Grid.Row="2" >
+            <Grid  x:Name="AnastasiaLogIn" Visibility="Hidden" Grid.Column="0" Grid.ColumnSpan="7" Grid.RowSpan="14" Grid.Row="2" Margin="0,0,0,-0.333" >
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -999,7 +1018,7 @@
             <Viewbox Grid.Column="1" Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="4" >
                 <Label Content="Понравившиеся треки" Style="{DynamicResource LabelStyle}" ></Label>
             </Viewbox>
-        
+
             <Button x:Name="CloseFTList" Grid.Row="2" Style="{DynamicResource MainButtonStyle}" Content="X" Click="CloseFTList_Click"></Button>
             <Button x:Name="ClearFTList" Grid.Row="14" Grid.Column="5" Style="{DynamicResource MainButtonStyle}" Content="Очистить список" Click="ClearFTList_Click"></Button>
             <ListView x:Name="FTListView" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="4" Grid.RowSpan="10" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="White"></ListView>

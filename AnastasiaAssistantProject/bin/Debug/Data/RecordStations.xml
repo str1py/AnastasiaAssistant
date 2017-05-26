@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <RecordRadio>
-<RecordStation1> <title>Radio Record</title><link>http://air2.radiorecord.ru:805/rr_320</link>  </RecordStation1> 
-<RecordStation2> <title>Russian Mix</title> <link>http://air2.radiorecord.ru:805/rus_320</link>  </RecordStation2> 
-<RecordStation3> <title>Record Club</title> <link>http://air2.radiorecord.ru:805/club_320</link>  </RecordStation3> 
-<RecordStation4> <title>Pirate Station</title> <link>http://air2.radiorecord.ru:805/ps_320</link>  </RecordStation4> 
-<RecordStation5> <title>Record Dancecore</title> <link>http://air2.radiorecord.ru:805/dc_320</link> </RecordStation5> 
-<RecordStation6> <title>Record Hardstyle</title> <link>http://air2.radiorecord.ru:805/teo_320</link>  </RecordStation6> 
-<RecordStation7> <title>Disko 90-x</title> <link>http://air2.radiorecord.ru:805/sd90_320</link> </RecordStation7> 
-<RecordStation8> <title>Medlyak FM</title> <link>http://air2.radiorecord.ru:805/mdl_320</link>  </RecordStation8> 
-<RecordStation9> <title>Gop FM</title> <link>http://air2.radiorecord.ru:805/gop_320</link>  </RecordStation9> 
-<RecordStation10> <title>Record Deep</title> <link>http://air2.radiorecord.ru:805/deep_320</link>  </RecordStation10> 
-<RecordStation11> <title>Record Dubstep</title> <link>http://air2.radiorecord.ru:805/dub_320</link> </RecordStation11> 
-<RecordStation12> <title>Rock Radio</title> <link>http://air2.radiorecord.ru:805/rock_320</link>  </RecordStation12> 
-<RecordStation13> <title>Transmission</title> <link>http://air2.radiorecord.ru:805/tm_320</link> </RecordStation13> 
-<RecordStation14> <title>Record Chill-Out</title> <link>http://air2.radiorecord.ru:805/chil_320</link>  </RecordStation14> 
-<RecordStation15> <title>Vip Mix</title> <link>http://air2.radiorecord.ru:805/vip_320</link> </RecordStation15> 
-<RecordStation16> <title>Record Breaks</title> <link>http://air2.radiorecord.ru:805/brks_320</link> </RecordStation16> 
-<RecordStation17> <title>Record Trap</title> <link>http://air2.radiorecord.ru:805/trap_320</link>  </RecordStation17> 
-<RecordStation18> <title>Pump'n'Klubb</title> <link>http://air2.radiorecord.ru:805/pump_320</link>  </RecordStation18> 
+	<RecordStation1> <title>Radio Record</title><link>http://air2.radiorecord.ru:805/rr_320</link>  </RecordStation1> 
+	<RecordStation2> <title>Russian Mix</title> <link>http://air2.radiorecord.ru:805/rus_320</link>  </RecordStation2> 
+	<RecordStation3> <title>Record Club</title> <link>http://air2.radiorecord.ru:805/club_320</link>  </RecordStation3> 
+	<RecordStation4> <title>Pirate Station</title> <link>http://air2.radiorecord.ru:805/ps_320</link>  </RecordStation4> 
+	<RecordStation5> <title>Record Dancecore</title> <link>http://air2.radiorecord.ru:805/dc_320</link> </RecordStation5> 
+	<RecordStation6> <title>Record Hardstyle</title> <link>http://air2.radiorecord.ru:805/teo_320</link>  </RecordStation6> 
+	<RecordStation7> <title>Disko 90-x</title> <link>http://air2.radiorecord.ru:805/sd90_320</link> </RecordStation7> 
+	<RecordStation8> <title>Medlyak FM</title> <link>http://air2.radiorecord.ru:805/mdl_320</link>  </RecordStation8> 
+	<RecordStation9> <title>Gop FM</title> <link>http://air2.radiorecord.ru:805/gop_320</link>  </RecordStation9> 
+	<RecordStation10> <title>Record Deep</title> <link>http://air2.radiorecord.ru:805/deep_320</link>  </RecordStation10> 
+	<RecordStation11> <title>Record Dubstep</title> <link>http://air2.radiorecord.ru:805/dub_320</link> </RecordStation11> 
+	<RecordStation12> <title>Rock Radio</title> <link>http://air2.radiorecord.ru:805/rock_320</link>  </RecordStation12> 
+	<RecordStation13> <title>Transmission</title> <link>http://air2.radiorecord.ru:805/tm_320</link> </RecordStation13> 
+	<RecordStation14> <title>Record Chill-Out</title> <link>http://air2.radiorecord.ru:805/chil_320</link>  </RecordStation14> 
+	<RecordStation15> <title>Vip Mix</title> <link>http://air2.radiorecord.ru:805/vip_320</link> </RecordStation15> 
+	<RecordStation16> <title>Record Breaks</title> <link>http://air2.radiorecord.ru:805/brks_320</link> </RecordStation16> 
+	<RecordStation17> <title>Record Trap</title> <link>http://air2.radiorecord.ru:805/trap_320</link>  </RecordStation17> 
+	<RecordStation18> <title>Pump'n'Klubb</title> <link>http://air2.radiorecord.ru:805/pump_320</link>  </RecordStation18> 
 </RecordRadio>

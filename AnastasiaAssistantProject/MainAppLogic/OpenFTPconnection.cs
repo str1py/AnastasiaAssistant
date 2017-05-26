@@ -13,6 +13,7 @@ namespace AnastasiaAssistantProject.MainAppLogic
             public readonly string Login = "str1pyblog";
             public readonly string Password = "mSsEtm23NixhpbDTbtCqq2owmRELkHxenMFnNMe5w01gj2yHTB8Qm16ZJ6kT";
 
+
             void UploadFile()
             {
 

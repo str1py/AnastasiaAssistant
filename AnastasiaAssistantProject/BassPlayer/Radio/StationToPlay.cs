@@ -10,36 +10,60 @@ namespace AnastasiaAssistantProject.BassPlayer.Radio
 {
     class StationToPlay
     {
-            System.Windows.Threading.DispatcherTimer UpdateStationInfo = new System.Windows.Threading.DispatcherTimer();
+        System.Windows.Threading.DispatcherTimer UpdateStationInfo = new System.Windows.Threading.DispatcherTimer();
 
-            public static string StationName;
-            public static string TrackName;
-            public static string TrackArtist;
-            public static string TrackGenre;
-            public static string ChannelInfo;
-            public static string URL;
+        public static string StationName;
+        public static string TrackName;
+        public static string TrackArtist;
+        public static string TrackGenre;
+        public static string ChannelInfo;
+        public static string URL;
 
-            public void Getindex(int index)
+        public void Getindex(int stationindex, int stationgroup)
+        {
+            if (stationgroup == 0)
             {
                 string path = System.IO.Directory.GetCurrentDirectory();
                 XDocument xDoc = XDocument.Load(path + @"/Data/RecordStations.xml");
-                URL = xDoc.Root.Element("RecordStation" + (index + 1)).Element("link").Value;
-                StationName = xDoc.Root.Element("RecordStation" + (index + 1)).Element("title").Value;
+                URL = xDoc.Root.Element("RecordStation" + (stationindex + 1)).Element("link").Value;
+                StationName = xDoc.Root.Element("RecordStation" + (stationindex + 1)).Element("title").Value;
                 timerStart();
             }
-            public void GetStationInfo()
+            if (stationgroup == 1)
             {
-                TAG_INFO tagInfo = new TAG_INFO(URL);
-                if (BassTags.BASS_TAG_GetFromURL(BassNetHelper.Stream, tagInfo))
-                {
-                    TrackArtist = tagInfo.artist;
-                    TrackName = tagInfo.title;
-                    TrackGenre = tagInfo.genre;
-                    
-                    if (tagInfo.bpm == "") { ChannelInfo = "Bitrate : " + tagInfo.bitrate; }
-                    else { ChannelInfo = "Bitrate : " + tagInfo.bitrate + "kBit/sec   Bpm : " + tagInfo.bpm; }
-                }
+                string path = System.IO.Directory.GetCurrentDirectory();
+                XDocument xDoc = XDocument.Load(path + @"/Data/MoscowRadioStations.xml");
+                URL = xDoc.Root.Element("MRS" + (stationindex + 1)).Element("link").Value;
+                StationName = xDoc.Root.Element("MRS" + (stationindex + 1)).Element("title").Value;
+                timerStart();
             }
+            if(stationgroup==2)
+            {
+                string path = System.IO.Directory.GetCurrentDirectory();
+                XDocument xDoc = XDocument.Load(path + @"/Data/BBCRadioStations.xml");
+                URL = xDoc.Root.Element("BBCRadio" + (stationindex + 1)).Element("link").Value;
+                StationName = xDoc.Root.Element("BBCRadio" + (stationindex + 1)).Element("title").Value;
+                timerStart();
+            }
+        }
+
+
+
+        public void GetStationInfo()
+        {
+            TAG_INFO tagInfo = new TAG_INFO(URL);
+            if (BassTags.BASS_TAG_GetFromURL(BassNetHelper.Stream, tagInfo))
+            {
+                TrackArtist = tagInfo.artist;
+                TrackName = tagInfo.title;
+                TrackGenre = tagInfo.genre;
+
+                if (tagInfo.bpm == "") { ChannelInfo = "Bitrate : " + tagInfo.bitrate; }
+                else { ChannelInfo = "Bitrate : " + tagInfo.bitrate + "kBit/sec   Bpm : " + tagInfo.bpm; }
+            }
+            else{ TrackArtist = "No Data"; TrackName = "No Data"; }
+
+        }
 
             private void timerStart()
             {

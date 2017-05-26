@@ -106,5 +106,17 @@ namespace AnastasiaAssistantProject.Properties {
                 this["TelegramUserID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public float UserVolume {
+            get {
+                return ((float)(this["UserVolume"]));
+            }
+            set {
+                this["UserVolume"] = value;
+            }
+        }
     }
 }
