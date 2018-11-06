@@ -1,10 +1,9 @@
 ﻿using AnastasiaAssistantProject.MainAppLogic;
 using System.Threading.Tasks;
 using System.Windows;
-using Windows.Devices.Geolocation;
 using Windows;
 using System;
-using Windows.System;
+
 
 namespace AnastasiaAssistantProject
 {
